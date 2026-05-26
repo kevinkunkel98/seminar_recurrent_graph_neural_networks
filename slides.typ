@@ -435,56 +435,85 @@
 // ══════════════════════════════════════════════════════════════════════════════
 = GNNs
 
-== Message Passing GNNs #h(0.5em) #tom
+== GNNs #h(0.5em) #tom
 
 #v(0.2em)
-Each node $v$ maintains a *feature vector* updated in rounds:
+Updating feature vectors:
 
 $
-  x_v^((t)) = phi lr((x_v^((t-1)),, plus.o_(u in cal(N)(v)) psi(x_v^((t-1)), x_u^((t-1)))))
+  x_v^(t) = "COM" (x_v^(t-1), "AGG"( \{\{ x_u^(t-1) | (v,u) in E \}\} ) )
 $
-
 - *AGG* — aggregate neighbor feature vectors (e.g.\ sum, max)
-- *COM* — combine own vector with aggregated result (e.g.\ MLP, GRU)
+- *COM* — combine own vector with aggregated result (e.g.\ MLP)
 
-#v(0.4em)
-*Standard GNN:* run for a *fixed* $N$ rounds, then read out. \
-$N$ is a hyperparameter — must be chosen in advance.
+#v(0.5em)
+#remark[
+  Unusual convention: Vectors are collected from *out-neighbors*!
+]
 
-// ── SLIDE: GNN Visualization ──────────────────────────────────────────────────
 == GNN — Message Passing Visualization #h(0.5em) #tom
 
 #align(center + horizon)[
   #gnn-big-diagram
 ]
 
-// ── SLIDE: Standard vs. Recurrent ────────────────────────────────────────────
-== Standard vs. Recurrent GNNs
+== R-simple aggregate-combine GNNs #tom
+
+*R-simple aggregate-combine GNNs:*
+
+$
+  x_v^(t) &= "COM" (x_v^(t-1), "AGG"( \{\{ x_u^(t-1) | (v,u) in E \}\} ) ) \
+  &= "ReLU*" (x_v^(t-1) dot bold(C) + sum_((v,u) in E) x_u^(t-1) dot bold(A) + bold(b) )
+$
+$bold(A)$: matrix, $bold(b)$: bias vector, $bold(C)$: matrix.
+
+*ReLU\*: * truncated ReLU
+
+(todo: image of ReLU\* func)
+
+== Node Properties #tom
+
+*Example property:* _Is symbol $p$ reachable from node $v$?_
+
+-> How to solve via GNN?
+
+Idea:
+- Inititally, each node with label $p$ gets feature 1.
+- Update: If any neighbor has 1, set self to 1.
+- Accepting feature vectors $F = {1}$.
+
+Realizable as *R-simple aggregate-combine GNN*:
+$
+  x_v^(t) = "ReLU*" (x_v^(t-1) + sum_((v,u) in E) x_u^(t-1) )
+$
+
+(by setting $bold(A)=1$, $bold(b)=0$, $bold(C)=1$.)
+
+
+== Constant-Iteration vs. Recurrent GNNs #tom
 
 #v(0.2em)
 #grid(columns: (1fr, 1fr), gutter: 1.0em,
   block(stroke: 1pt + blue, fill: sky, inset: 0.8em, radius: 3pt, width: 100%)[
-    #text(weight: "bold", fill: blue)[Standard GNN]\
+    #text(weight: "bold", fill: blue)[Constant-iteration GNN]\
     #v(0.3em)
-    - Runs exactly $N$ rounds
-    - $N$ fixed before computation
+    - Runs exactly $N$ rounds ($N$ as hyperparameter)
     - After $N$ rounds: accept or reject
+    - $x_v^N in F$
     - *Problem:* must know $N$ upfront
   ],
   block(stroke: 1pt + sage, fill: mint, inset: 0.8em, radius: 3pt, width: 100%)[
     #text(weight: "bold", fill: sage)[Recurrent GNN]\
     #v(0.3em)
-    - No fixed round limit
     - Runs until a node reaches an *accepting* state
+    - $x_v^t in F$ for *some* $t in NN$
     - A special $bold("DONE")$ vector signals termination
     - The GNN decides *itself* when it is done
   ],
 )
 
-#v(0.5em)
-#remark[
-  What happens when computation can take *arbitrarily long*? E.g.\ a loop that iterates until some condition is met? — We need an adaptive stopping criterion.
-]
+Both can be used to express a *node property*.
+
 
 // ── SLIDE: RGNN Visualization ─────────────────────────────────────────────────
 == Recurrent GNN — Computation Visualization #h(0.5em) #tom
