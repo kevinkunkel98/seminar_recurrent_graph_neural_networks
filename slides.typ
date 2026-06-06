@@ -32,12 +32,12 @@
   #body
 ]
 
-#let theorem(title, body)    = thm-box([Theorem: #title], body)
+#let theorem(title, body)    = thm-box([Satz: #title], body)
 #let definition(title, body) = thm-box([Definition: #title], body,
   fill: mint, stroke-color: sage)
-#let remark(body)            = thm-box([Remark], body,
+#let remark(body)            = thm-box([Anmerkung], body,
   fill: rgb("#fef9ec"), stroke-color: amber)
-#let example(body)           = thm-box([Example], body,
+#let example(body)           = thm-box([Beispiel], body,
   fill: rgb("#f3e5f5"), stroke-color: rgb("#7b1fa2"))
 
 // ── Slide setup ───────────────────────────────────────────────────────────────
@@ -52,15 +52,58 @@
   ),
   config-page(margin: (x: 2.8em, y: 2.2em)),
   config-info(
-    title:       [Recurrent Graph Neural Networks],
-    subtitle:    [Logical Characterizations via Modal Logic],
+    title:       [Rekurrente Graph Neural Networks],
+    subtitle:    [Logische Charakterisierungen mittels Modallogik],
     author:      [Kevin Kunkel & Thomas Mohr],
-    date:        [Summer Semester 2026],
-    institution: [Universität Leipzig — Seminar: Graph Neural Networks \ Supervisor: Prof. Carsten Lutz],
+    date:        [Sommersemester 2026],
+    institution: [Universität Leipzig — Seminar: Graph Neural Networks \ Betreuer: Prof. Carsten Lutz],
   ),
 )
 
 #set text(size: 19pt)
+
+// ── ReLU* (truncated ReLU) diagram ───────────────────────────────────────────
+#let relu-star-diagram = canvas(length: 1cm, {
+  import draw: *
+  let col-ax  = luma(100)
+  let col-fn  = rgb("#1a4f8a")
+  let col-hi  = rgb("#1e6b3c")
+
+  // Axes
+  line((-0.8, 0), (3.2, 0), stroke: (paint: col-ax, thickness: 0.8pt),
+       mark: (end: ">", size: 0.18))
+  line((0, -0.5), (0, 2.0), stroke: (paint: col-ax, thickness: 0.8pt),
+       mark: (end: ">", size: 0.18))
+
+  // Axis labels
+  content((3.35, 0),   text(size: 0.28cm, fill: col-ax)[$x$])
+  content((0.15, 2.1), text(size: 0.28cm, fill: col-ax)[$y$])
+
+  // Tick marks + labels
+  line((1.5, -0.08), (1.5, 0.08), stroke: (paint: col-ax, thickness: 0.6pt))
+  content((1.5, -0.30), text(size: 0.25cm, fill: col-ax)[$1$])
+  line((-0.08, 1.5), (0.08, 1.5), stroke: (paint: col-ax, thickness: 0.6pt))
+  content((-0.28, 1.5), text(size: 0.25cm, fill: col-ax)[$1$])
+
+  // Dashed guide lines
+  line((1.5, 0), (1.5, 1.5),
+       stroke: (paint: luma(200), thickness: 0.6pt, dash: "dashed"))
+  line((0, 1.5), (1.5, 1.5),
+       stroke: (paint: luma(200), thickness: 0.6pt, dash: "dashed"))
+
+  // Function: 0 for x<0, identity for 0≤x≤1, 1 for x>1
+  line((-0.8, 0),   (0,   0),   stroke: (paint: col-fn, thickness: 2.2pt))
+  line((0,    0),   (1.5, 1.5), stroke: (paint: col-fn, thickness: 2.2pt))
+  line((1.5,  1.5), (3.0, 1.5), stroke: (paint: col-hi, thickness: 2.2pt))
+
+  // Breakpoints
+  circle((0,   0),   radius: 0.07, fill: col-fn, stroke: none)
+  circle((1.5, 1.5), radius: 0.07, fill: col-hi, stroke: none)
+
+  // Label
+  content((2.5, 1.85), text(size: 0.30cm, fill: col-fn, weight: "bold")[ReLU\*])
+  content((2.5, 0.85), text(size: 0.24cm, fill: luma(90), style: "italic")[= min(1, max(0, x))])
+})
 
 // ── GNN diagram for title slide ───────────────────────────────────────────────
 #let gnn-diagram = canvas(length: 1cm, {
@@ -139,7 +182,7 @@
   content(v, text(fill: white, size: 0.32cm, weight: "bold")[$v$])
 
   content((0, -2.0), text(size: 0.24cm, fill: col-v)[
-    $bold(x)_v^((t)) = "COM"(bold(x)_v^((t-1)),,"AGG"({bold(x)_u^((t-1))}_u))$
+    $bold(x)_v^((t)) = "COM"(bold(x)_v^((t-1)),,  "AGG"({bold(x)_u^((t-1))}_u))$
   ])
 })
 
@@ -376,7 +419,7 @@
 })
 
 // ══════════════════════════════════════════════════════════════════════════════
-// SLIDE 1 — Title
+// SLIDE 1 — Titelfolie
 // ══════════════════════════════════════════════════════════════════════════════
 #slide(
   config: config-methods(header: _ => none, footer: _ => none),
@@ -385,19 +428,19 @@
 )[
   #set align(left)
   #v(1fr)
-  #text(size: 26pt, weight: "bold", fill: navy)[Recurrent Graph Neural Networks]
+  #text(size: 26pt, weight: "bold", fill: navy)[Rekurrente Graph Neural Networks]
   #v(0.3em)
-  #text(size: 15pt, fill: luma(80))[Logical Characterizations via Modal Logic]
+  #text(size: 15pt, fill: luma(80))[Logische Charakterisierungen mittels Modallogik]
   #v(0.9em)
   #line(length: 80%, stroke: 1pt + navy)
   #v(0.6em)
   #text(size: 13pt)[Kevin Kunkel & Thomas Mohr]
   #v(0.2em)
-  #text(size: 11pt, fill: luma(100))[Summer Semester 2026]
+  #text(size: 11pt, fill: luma(100))[Sommersemester 2026]
   #v(0.15em)
   #text(size: 11pt, fill: luma(100))[
     Universität Leipzig — Seminar: Graph Neural Networks \
-    Supervisor: Prof. Carsten Lutz
+    Betreuer: Prof. Carsten Lutz
   ]
   #v(1fr)
 ][
@@ -405,24 +448,24 @@
 ]
 
 // ══════════════════════════════════════════════════════════════════════════════
-// SLIDE 2 — Outline
+// SLIDE 2 — Gliederung
 // ══════════════════════════════════════════════════════════════════════════════
-= Outline
+= Gliederung
 
-== Talk Overview
+== Überblick des Vortrags
 
 #v(0.4em)
 #grid(columns: (auto, 1fr, auto), gutter: 0.6em, row-gutter: 0.55em,
   align: (right, left, left),
-  tom,  [*2.1 — Graph Neural Networks*], [~5 min],
-  [],   [Message passing, standard vs.\ recurrent, floats vs.\ reals], [],
-  kevin,[*2.2 — Logics*], [~5 min],
-  [],   [GML, GMSC, ω-GML, and their hierarchy], [],
-  tom,  [*3 — Connecting GNNs and Logics via Automata*], [~20 min],
-  [],   [Distributed automata, main theorems, GNN[F] vs.\ GNN[R]], [],
-  kevin,[*4 — Characterizing GNNs over MSO Properties*], [~20 min],
-  [],   [What is MSO? The collapse theorem], [],
-  [#tom#h(0.3em)#kevin], [*Conclusion*], [~10 min],
+  tom,  [*2.1 — Graph Neural Networks*], [~8 Min.],
+  [],   [Nachrichtenweiterleitung, Standard vs.\ Rekurrent, Gleitkommazahlen vs. Reelle Zahlen], [],
+  kevin,[*2.2 — Logiken*], [~8 Min.],
+  [],   [GML, GMSC, ω-GML und ihre Hierarchie], [],
+  tom,  [*3 — Verbindung von GNNs und Logiken über Automaten*], [~18 Min.],
+  [],   [Verteilte Automaten, Hauptsätze, GNN[F] vs.\ GNN[R]], [],
+  kevin,[*4 — Charakterisierung von GNNs über MSO-Eigenschaften*], [~18 Min.],
+  [],   [Was ist MSO? Das Kollapstheorem], [],
+  [#tom#h(0.3em)#kevin], [*Fazit + Diskussion*], [~8 Min.],
 )
 
 #v(0.6em)
@@ -431,247 +474,436 @@
 ]
 
 // ══════════════════════════════════════════════════════════════════════════════
-// SECTION 2.1 — GNNs  [Tom]
+// ABSCHNITT 2.1 — GNNs  [Tom]
 // ══════════════════════════════════════════════════════════════════════════════
 = GNNs
 
 == GNNs #h(0.5em) #tom
 
 #v(0.2em)
-Updating feature vectors:
+Aktualisierung von Merkmalsvektoren:
 
 $
   x_v^(t) = "COM" (x_v^(t-1), "AGG"( \{\{ x_u^(t-1) | (v,u) in E \}\} ) )
 $
-- *AGG* — aggregate neighbor feature vectors (e.g.\ sum, max)
-- *COM* — combine own vector with aggregated result (e.g.\ MLP)
+#pause
+- *AGG* — aggregiert die Merkmalsvektoren der Nachbarn (z.B. Summe, Maximum)
+#pause
+- *COM* — kombiniert den eigenen Vektor mit dem aggregierten Ergebnis (z.B. MLP)
 
 #v(0.5em)
+#pause
 #remark[
-  Unusual convention: Vectors are collected from *out-neighbors*!
+  Ungewöhnliche Konvention: Vektoren werden von *ausgehenden Nachbarn* gesammelt!
 ]
 
-== GNN — Message Passing Visualization #h(0.5em) #tom
+== GNN — Visualisierung der Nachrichtenweiterleitung #h(0.5em) #tom
 
 #align(center + horizon)[
   #gnn-big-diagram
 ]
 
-== R-simple aggregate-combine GNNs #tom
+== R-einfache Aggregations-Kombinations-GNNs #tom
 
-*R-simple aggregate-combine GNNs:*
+*R-einfache Aggregations-Kombinations-GNNs:*
 
 $
   x_v^(t) &= "COM" (x_v^(t-1), "AGG"( \{\{ x_u^(t-1) | (v,u) in E \}\} ) ) \
   &= "ReLU*" (x_v^(t-1) dot bold(C) + sum_((v,u) in E) x_u^(t-1) dot bold(A) + bold(b) )
 $
-$bold(A)$: matrix, $bold(b)$: bias vector, $bold(C)$: matrix.
+$bold(A)$: Matrix, $bold(b)$: Bias-Vektor, $bold(C)$: Matrix.
 
-*ReLU\*: * truncated ReLU
+*ReLU\*:* gestutzte ReLU — klemmt den Ausgang auf $[0, 1]$
 
-(todo: image of ReLU\* func)
+#v(0.3em)
+#align(center)[#relu-star-diagram]
 
-== Node Properties #tom
+== Knoteneigenschaften #tom
 
-*Example property:* _Is symbol $p$ reachable from node $v$?_
+*Beispieleigenschaft:* _Ist Symbol $p$ von Knoten $v$ aus erreichbar?_
 
--> How to solve via GNN?
+-> Wie lässt sich das über GNNs lösen?
 
-Idea:
-- Inititally, each node with label $p$ gets feature 1.
-- Update: If any neighbor has 1, set self to 1.
-- Accepting feature vectors $F = {1}$.
+Idee:
+- Initial erhält jeder Knoten mit Label $p$ den Merkmalswert 1.
+#pause
+- Update: Falls ein Nachbar den Wert 1 hat, setze sich selbst auf 1.
+#pause
+- Akzeptierende Merkmalsvektoren $F = {1}$.
 
-Realizable as *R-simple aggregate-combine GNN*:
+#pause
+Realisierbar als *R-einfaches Aggregations-Kombinations-GNN*:
 $
   x_v^(t) = "ReLU*" (x_v^(t-1) + sum_((v,u) in E) x_u^(t-1) )
 $
 
-(by setting $bold(A)=1$, $bold(b)=0$, $bold(C)=1$.)
+(durch Setzen von $bold(A)=1$, $bold(b)=0$, $bold(C)=1$.)
 
 
-== Constant-Iteration vs. Recurrent GNNs #tom
+== Konstantiterations- vs. Rekurrente GNNs #tom
 
 #v(0.2em)
 #grid(columns: (1fr, 1fr), gutter: 1.0em,
   block(stroke: 1pt + blue, fill: sky, inset: 0.8em, radius: 3pt, width: 100%)[
-    #text(weight: "bold", fill: blue)[Constant-iteration GNN]\
+    #text(weight: "bold", fill: blue)[Konstantiterations-GNN]\
     #v(0.3em)
-    - Runs exactly $N$ rounds ($N$ as hyperparameter)
-    - After $N$ rounds: accept or reject
+    - Läuft genau $N$ Runden ($N$ als Hyperparameter)
+    - Nach $N$ Runden: Akzeptieren oder Ablehnen
     - $x_v^N in F$
-    - *Problem:* must know $N$ upfront
+    - *Problem:* $N$ muss vorab bekannt sein
   ],
   block(stroke: 1pt + sage, fill: mint, inset: 0.8em, radius: 3pt, width: 100%)[
-    #text(weight: "bold", fill: sage)[Recurrent GNN]\
+    #text(weight: "bold", fill: sage)[Rekurrentes GNN]\
     #v(0.3em)
-    - Runs until a node reaches an *accepting* state
-    - $x_v^t in F$ for *some* $t in NN$
-    - A special $bold("DONE")$ vector signals termination
-    - The GNN decides *itself* when it is done
+    - Läuft bis ein Knoten einen *akzeptierenden* Zustand erreicht
+    - $x_v^t in F$ für *ein* $t in NN$
+    - Ein spezieller $bold("DONE")$-Vektor signalisiert das Ende
+    - Das GNN entscheidet *selbst*, wann es fertig ist
   ],
 )
 
-Both can be used to express a *node property*.
+Beide können verwendet werden, um eine *Knoteneigenschaft* auszudrücken.
+
+#pause
+#v(0.4em)
+#block(fill: rgb("#fff8e1"), stroke: (left: 3pt + amber), inset: (x: 0.9em, y: 0.65em), radius: 3pt)[
+  *Reachability als Trennbeispiel:* Erreichbarkeit ist mit einem rekurrenten GNN ausdrückbar, aber mit *keinem* Konstantiterations-GNN — denn für jedes feste $N$ gibt es einen Graphen, in dem $p$ erst nach mehr als $N$ Schritten erreichbar ist. Das ist die zentrale Neuerung gegenüber Barceló et al. 2020 @barcelo2020logical.
+]
 
 
 // ── SLIDE: RGNN Visualization ─────────────────────────────────────────────────
-== Recurrent GNN — Computation Visualization #h(0.5em) #tom
+== Rekurrentes GNN — Berechnungsvisualisierung #h(0.5em) #tom
 
 #align(center + horizon)[
   #rgnn-big-diagram
   #v(0.5em)
   #text(size: 0.82em, fill: luma(90), style: "italic")[
-    Example: Reachability of label $p$ — state $1$ = "$p$ is reachable from this node" — GNN accepts when $v$ reaches state $1$
+    Beispiel: Erreichbarkeit des Labels $p$ — Zustand $1$ = „$p$ ist von diesem Knoten aus erreichbar" — GNN akzeptiert, wenn $v$ Zustand $1$ erreicht
   ]
 ]
 
 // ── SLIDE: Formal definition of Recurrent GNN ────────────────────────────────
-== Recurrent GNNs — Formal Model
+== Rekurrente GNNs — Formales Modell
 
-#definition([Recurrent GNN])[
-  A recurrent $"GNN"[RR]$ over $(Pi, d)$ is a tuple $cal(G) = (RR^d, pi, delta, F)$:
-  - *init* $pi: cal(P)(Pi) -> RR^d$, #h(0.8em)
-    *transition* $delta(x,y) = "COM"(x, "AGG"(y))$, #h(0.8em)
-    *accept* $F subset.eq RR^d$
+Ein GNN[$RR$] erhält einen gerichteten, knoten-gelabelten Graphen als Eingabe und liefert für jeden Knoten eine *Bool'sche Klassifikation* (akzeptiert / nicht akzeptiert). Die akzeptierenden Knoten sind genau jene mit Endzustand in $F$.
 
-  $cal(G)$ *accepts* $(G, v)$ iff $x_v^t in F$ for *some* $t in NN$.
+#v(0.2em)
+#definition([Rekurrentes GNN])[
+  Ein rekurrentes $"GNN"[RR]$ über $(Pi, d)$ ist ein Tupel $cal(G) = (RR^d, pi, delta, F)$:
+  - *Init* $pi: cal(P)(Pi) -> RR^d$, #h(0.8em)
+    *Übergang* $delta(x,y) = "COM"(x, "AGG"(y))$, #h(0.8em)
+    *Akzeptanz* $F subset.eq RR^d$
+
+  $cal(G)$ *akzeptiert* $(G, v)$ genau dann, wenn $x_v^t in F$ für *ein* $t in NN$.
 ]
 
 #v(0.3em)
-Replace $RR$ with floating-point $FF$ → $"GNN"[FF]$.
+Ersetze $RR$ durch Gleitkommazahlen $FF$ → $"GNN"[FF]$.
 
-#example[
-  *Reachability of label $p$:* Use $C = A = 1, b = 0$ (1-dimensional).
-  Round 0: state is 1 if $p in lambda(v)$, else 0.
-  Round $t$: state is 1 if node or any neighbor is 1.
-  Propagates through the whole graph — regardless of size.
+#v(0.3em)
+*Der DONE-Mechanismus:* Ein ausgezeichneter Vektor $bold(d) in RR^d$ dient als Terminierungssignal.
+#block(fill: sand, stroke: (left: 3pt + amber), inset: (x: 0.9em, y: 0.6em), radius: 3pt)[
+  $delta(x, y) = cases(
+    bold(d) & "falls " x in F,
+    "COM"(x\, "AGG"(y)) & "sonst"
+  )$
+
+  Sobald $x_v^t in F$, bleibt der Knoten in $bold(d)$ — *Fixpunkt signalisiert Akzeptanz.*
 ]
 
 // ── SLIDE: Floats vs. Reals ───────────────────────────────────────────────────
-== GNN[F] vs. GNN[R] — Why It Matters
+== GNN[F] vs. GNN[R] — Warum das wichtig ist
 
 #v(0.2em)
-In practice GNNs use *floats* ($FF$). Theory usually assumes *reals* ($RR$).
+In der Praxis verwenden GNNs *Gleitkommazahlen* ($FF$). Die Theorie nimmt meist *reelle Zahlen* ($RR$) an.
 
 #v(0.3em)
 #block(fill: rgb("#fff8e1"), stroke: (left: 3pt + amber), inset: (x: 0.9em, y: 0.65em), radius: 3pt)[
-  *The float problem:* Floating-point addition is *not associative*:
+  *Das Gleitkommazahlenproblem:* Gleitkommazahlenaddition ist *nicht assoziativ*:
   $(a + b) + c eq.not a + (b + c)$
 
-  In a 2-decimal system: $1 + (-1) + 0.01 = 0.01$, but $(1 + 0.01) + (-1) = 1.0 + (-1) = 0$\
-  because $1.01$ is not representable and gets rounded.
+  In einem 2-Dezimalsystem: $1 + (-1) + 0.01 = 0.01$, aber $(1 + 0.01) + (-1) = 1.0 + (-1) = 0$\
+  da $1.01$ nicht darstellbar ist und gerundet wird.
 ]
 
 #v(0.3em)
-*Consequence* (Proposition 2.3): For every float system $FF$ there exists $k in NN$ such that for all multisets $M$ of floats:
+*Folgerung* (Proposition 2.3): Für jedes Gleitkommazahlensystem $FF$ gibt es ein $k in NN$, sodass für alle Multimengen $M$ von Gleitkommazahlen gilt:
 $
   "SUM"_FF (M) = "SUM"_FF (M|_k)
 $
-Past $k$ copies of a value, additional copies make *no difference* — floats can't count beyond a fixed bound.
+Nach $k$ Kopien eines Wertes machen weitere Kopien *keinen Unterschied* — Gleitkommazahlen können nicht über eine feste Grenze hinaus zählen.
+
+#v(0.3em)
+#block(fill: mint, stroke: (left: 3pt + sage), inset: (x: 0.9em, y: 0.6em), radius: 3pt)[
+  *Konvention:* Im Folgenden nehmen wir GNN[$FF$] stets als *bounded* im Sinne von Prop. 2.3 an. Genau diese Beschränkung macht GNN[$FF$] strikt schwächer als GNN[$RR$].
+]
 
 // ══════════════════════════════════════════════════════════════════════════════
-// SECTION 2.2 — Logics  [Kevin]
+// ABSCHNITT 2.2 — Logiken  [Kevin]
 // ══════════════════════════════════════════════════════════════════════════════
-= Logics
+= Logiken
 
-== Graded Modal Logic (GML) #h(0.5em) #kevin
+== Gradierte Modallogik (GML) #h(0.5em) #kevin
 
 #v(0.2em)
-GML is propositional logic extended with *counting modalities*:
+GML ist Aussagenlogik, erweitert um *Zählmodalitäten*:
 $
   phi ::= top mid p mid not phi mid phi and phi mid lozenge_(>= k) phi
 $
 
-The key formula $lozenge_(>= k) phi$ means: *"at least $k$ out-neighbors satisfy $phi$"*
+Die Schlüsselformel $lozenge_(>= k) phi$ bedeutet: *„mindestens $k$ ausgehende Nachbarn erfüllen $phi$"*
 
 #v(0.3em)
 #example[
-  On *graphs:*
-  - $lozenge_(>= 1) p$ — "there is a neighbor with label $p$"
-  - $lozenge_(>= 3) (q and lozenge_(>= 2) r)$ — "at least 3 neighbors have $q$ and each has ≥2 neighbors with $r$"
+  Auf *Graphen:*
+  - $lozenge_(>= 1) p$ — „es gibt einen Nachbarn mit Label $p$"
+  - $lozenge_(>= 3) (q and lozenge_(>= 2) r)$ — „mindestens 3 Nachbarn haben $q$ und jeder hat ≥2 Nachbarn mit $r$"
 ]
 
 #v(0.3em)
-*Classic result* @barcelo2020logical: constant-iteration GNNs $equiv$ GML (relative to FO-definable properties)
+*Klassisches Ergebnis* @barcelo2020logical: Konstantiterations-GNNs $equiv$ GML (relativ zu FO-definierbaren Eigenschaften)
 
 // ── SLIDE: GMSC ───────────────────────────────────────────────────────────────
-== Graded Modal Substitution Calculus (GMSC)
+== Gradierter Modaler Substitutionskalkül (GMSC)
 
-GMSC extends GML with *recursive rules* — a program $Lambda$ consists of:
+GMSC erweitert GML um *rekursive Regeln* — ein Programm $Lambda$ besteht aus zwei Klauseltypen:
 
+#v(0.2em)
+#grid(columns: (1fr, 1fr), gutter: 0.8em,
+  block(fill: sky, stroke: (left: 3pt + blue), inset: (x: 0.8em, y: 0.6em), radius: 3pt)[
+    *Terminalklausel* `X(0) :− φ`\
+    $phi ::= top | p | not phi | phi and phi | lozenge_(>= k) phi$\
+    #text(size: 0.82em, style: "italic")[Reine GML-Formel — keine Schema-Variablen]
+  ],
+  block(fill: mint, stroke: (left: 3pt + sage), inset: (x: 0.8em, y: 0.6em), radius: 3pt)[
+    *Iterationsklausel* `X :− ψ`\
+    $psi ::= top | p | X | not psi | psi and psi | lozenge_(>= k) psi$\
+    #text(size: 0.82em, style: "italic")[Darf Schema-Variable $X$ rekursiv enthalten]
+  ],
+)
+
+#v(0.25em)
+Die $n$-te Entfaltung $X^n$: ersetze $X$ in $psi$ durch $X^(n-1)$, beginnend mit $X^0 = phi$.
+
+Ein Programm $Lambda$ hat eine Menge $cal(A)$ von *appointed* Variablen.
+$Lambda$ akzeptiert $(G, v)$, falls $G, v tack.r.double X^n$ für *ein* $n$ und *ein* $X in cal(A)$.
+
+#pause
+#v(0.3em)
+#example[
+  *Erreichbarkeit von $p$:* #h(1em) `X(0) :− p` #h(1.5em) `X :− ◇X` \
+  $X^i = lozenge dots.c lozenge p$ (genau $i$ Rauten) = Erreichbarkeit in $i$ Schritten
+]
+
+// ── SLIDE: GMSC extended example ─────────────────────────────────────────────
+== GMSC — Komplexeres Beispiel: Erreichbarkeit via $q$-Knoten #h(0.5em) #kevin
+
+#v(0.2em)
+*Eigenschaft:* Knoten $v$ erreicht $p$ über einen Pfad, auf dem *alle Zwischenknoten* Label $q$ tragen.
+
+#v(0.25em)
 #block(fill: sand, stroke: 0.4pt + luma(200), inset: (x: 0.9em, y: 0.7em), radius: 3pt)[
   ```
-  X(0) :− φ    // base case: starting formula (GML)
-  X    :− ψ    // iteration: rule that may use X recursively
+  Q(0) :− p           Q :− p ∨ (q ∧ ◇Q)
   ```
+  ($Q$ appointed)
 ]
 
-#v(0.3em)
-The $n$-th unfolding $X^n$: substitute $X$ in $psi$ by $X^(n-1)$, starting from $X^0 = phi$.
+#v(0.25em)
+*Entfaltung:*
+- $Q^0 = p$ — wahr genau in $p$-Knoten
+#pause
+- $Q^1 = p or (q and lozenge Q^0) = p or (q and lozenge p)$ — $p$-Knoten oder $q$-Knoten mit $p$-Nachbar
+#pause
+- $Q^n$ = erreichbar von $v$ in $<= n$ Schritten über $q$-Knoten
 
-$Lambda$ accepts $(G, v)$ if $G, v tack.r.double X^n$ for *some* $n$.
+$(G, v) in "GMSC"$ gdw. $G, v tack.r.double Q^n$ für *ein* $n$ — d.h. Pfad zu $p$ über $q$-Knoten *existiert*.
 
-#v(0.3em)
-#example[
-  *Reachability of $p$:* #h(1em) `X(0) :− p` #h(1.5em) `X :− ◇X` \
-  $X^i = lozenge dots.c lozenge p$ (exactly $i$ diamonds) = reachability in $i$ steps
-]
+#v(0.2em)
+#grid(columns: (1fr, 1fr), gutter: 0.8em,
+  block(fill: sky, stroke: (left: 3pt + blue), inset: (x: 0.8em, y: 0.6em), radius: 3pt)[
+    *Eine Variable:* einfache Erreichbarkeit\
+    `Q(0) :− p` #h(0.3em) `Q :− ◇Q`\
+    $Q^n = lozenge^n p$ — Abstand ≤ $n$ zu $p$
+  ],
+  block(fill: mint, stroke: (left: 3pt + sage), inset: (x: 0.8em, y: 0.6em), radius: 3pt)[
+    *Zwei Variablen:* günstige Erreichbarkeit\
+    Zwei interagierende Klauseln können komplexe Pfadbedingungen ausdrücken, die GML allein nicht kann.
+  ],
+)
 
 // ── SLIDE: ω-GML and hierarchy ────────────────────────────────────────────────
-== ω-GML and the Logic Hierarchy
+== ω-GML und die Logikhierarchie
 
-ω-GML adds *infinite disjunctions* of GML formulas:
+ω-GML fügt *unendliche Disjunktionen* von GML-Formeln hinzu:
 $
   phi ::= psi quad | quad limits(union.big)_(psi in Psi) psi
-  quad (Psi "a countable set of GML formulas")
+  quad (Psi "eine abzählbare Menge von GML-Formeln")
 $
 
+#pause
 #v(0.3em)
-Since GNN[R] with real numbers can distinguish *arbitrarily many* values, it needs this infinite expressive power.
+Da GNN[R] mit reellen Zahlen *beliebig viele* Werte unterscheiden kann, benötigt es diese unendliche Ausdrucksstärke.
 
 #v(0.4em)
-*Expressive power:*
+*Ausdrucksstärke (semantische Inklusion, nicht syntaktisch):*
 $
-  "GML" quad subset quad "GMSC" quad subset quad omega"-GML"
+  "GML" quad subset.neq quad "GMSC" quad subset.neq quad omega"-GML"
 $
 
-#v(0.3em)
+#pause
+#v(0.1em)
+#remark[
+  GMSC $not subset$ MSO: es gibt Eigenschaften in GMSC, die MSO nicht ausdrücken kann (→ nächste Folie). GMSC und $mu$-Kalkül sind *orthogonal* — keine enthält die andere.
+]
+
+#pause
+#v(0.2em)
 #example[
-  *On strings:*\
-  FO $equiv$ star-free regular languages\
-  MSO $equiv$ all regular languages
+  *Auf Zeichenketten:*\
+  FO $equiv$ sternfreie reguläre Sprachen #h(1em) MSO $equiv$ alle regulären Sprachen
 
-  *On graphs:*\
-  FO can say: "every node has a neighbor"\
-  MSO can say: "the graph is bipartite", "there exists a path from $a$ to $b$"
+  *Auf Graphen:*\
+  FO: „jeder Knoten hat einen Nachbarn" #h(1em) MSO: „der Graph ist bipartit", „Pfad von $a$ nach $b$"
+]
+
+// ── Centre-Point tree diagram ─────────────────────────────────────────────────
+#let centre-point-diagram = canvas(length: 0.85cm, {
+  import draw: *
+  let col-dead = luma(155)
+  let col-x1   = rgb("#1a4f8a")
+  let col-x2   = rgb("#1e6b3c")
+  let col-edge = rgb("#7fa8cc")
+  let r = 0.30
+
+  let v  = (2.5, 3.6)
+  let u1 = (1.0, 2.1)
+  let u2 = (4.0, 2.1)
+  let d1 = (0.0, 0.5)
+  let d2 = (1.8, 0.5)
+  let d3 = (3.2, 0.5)
+  let d4 = (5.0, 0.5)
+
+  let es = (stroke: (paint: col-edge, thickness: 1.0pt), mark: (end: ">", size: 0.20))
+  line(v, u1, ..es); line(v, u2, ..es)
+  line(u1, d1, ..es); line(u1, d2, ..es)
+  line(u2, d3, ..es); line(u2, d4, ..es)
+
+  for (pos, lbl) in ((d1, $d_1$), (d2, $d_2$), (d3, $d_3$), (d4, $d_4$)) {
+    circle(pos, radius: r, fill: col-dead, stroke: none)
+    content(pos, text(fill: white, size: 0.22cm, weight: "bold")[#lbl])
+  }
+  content((2.5, -0.15), text(size: 0.20cm, fill: col-dead, style: "italic")[$X^0 = square bot$ (Sackgassen)])
+
+  circle(u1, radius: r, fill: col-x1, stroke: (paint: white, thickness: 1.2pt))
+  content(u1, text(fill: white, size: 0.24cm, weight: "bold")[$u_1$])
+  circle(u2, radius: r, fill: col-x1, stroke: (paint: white, thickness: 1.2pt))
+  content(u2, text(fill: white, size: 0.24cm, weight: "bold")[$u_2$])
+  content((-0.85, 2.1), text(size: 0.20cm, fill: col-x1)[$X^1$])
+
+  circle(v, radius: r * 1.3, fill: col-x2, stroke: (paint: rgb("#7fcda0"), thickness: 2pt))
+  content(v, text(fill: white, size: 0.28cm, weight: "bold")[$v$])
+  content((4.2, 3.6), text(size: 0.20cm, fill: col-x2, weight: "bold")[$X^2$: ACCEPT])
+})
+
+// ── SLIDE: Centre-Point — GMSC ⊄ MSO ─────────────────────────────────────────
+== Centre-Point — GMSC ausdrückbar, MSO nicht #h(0.5em) #kevin
+
+#v(0.15em)
+#definition([Centre-Point (Bsp. 2.5 @ahvonen2024logical)])[
+  $(G, w)$ hat die *Centre-Point-Eigenschaft* gdw. es ein $n in NN$ gibt, sodass *jeder* gerichtete Pfad von $w$ nach genau $n$ Schritten in einer *Sackgasse* (Knoten ohne ausgehende Nachbarn) endet.
+]
+
+#pause
+#v(0.25em)
+#grid(columns: (1fr, auto), gutter: 1.2em, align: (left, center + horizon),
+  [
+    *GMSC-Programm* ($X$ appointed):
+    #v(0.15em)
+    #block(fill: sand, stroke: 0.4pt + luma(200), inset: (x: 0.8em, y: 0.6em), radius: 3pt)[
+      ```
+      X(0) :− □⊥       // Basisfall: Sackgassen
+      X    :− ◇X ∧ □X  // Schritt rückwärts
+      ```
+    ]
+    #v(0.15em)
+    - $X^0 = square bot$ — wahr in Sackgassen ($square$ über leerem Nachbar-Set = wahr)
+    #pause
+    - $X^(n+1) = lozenge X^n and square X^n$ gilt in $v$ gdw. $v$ ≥1 Nachbar hat *und* alle Nachbarn $X^n$ erfüllen
+    #pause
+    - $X^n$ gilt in $v$ gdw. alle Pfade von $v$ haben Länge exakt $n$
+  ],
+  [#centre-point-diagram]
+)
+
+#pause
+#v(0.2em)
+#remark[
+  Centre-Point $in$ GMSC $without$ MSO: MSO kann globale Tiefenuniformität nicht ausdrücken. Damit ist Satz 4.3 eine echte Einschränkung — der Kollaps gilt nur *innerhalb* von MSO.
 ]
 
 // ══════════════════════════════════════════════════════════════════════════════
-// SECTION 3 — Connecting GNNs and Logics via Automata  [Tom]
+// ABSCHNITT 3 — GNNs und Logiken über Automaten  [Tom]
 // ══════════════════════════════════════════════════════════════════════════════
-= GNNs and Logics via Automata
+= GNNs und Logiken über Automaten
 
-== Distributed Automata — CMPA #h(0.5em) #tom
+== Verteilte Automaten — CMPA #h(0.5em) #tom
 
-#definition([Counting Message-Passing Automaton (CMPA)])[
-  A CMPA $(Q, q_0, delta, F)$ runs on graphs:
-  - Each node starts in state $q_0$
-  - Each node updates its state based on its *own state* and the *multiset* of neighbor states:
+#definition([Zählender Nachrichtenweiterleitungsautomat (CMPA)])[
+  Ein CMPA $(Q, q_0, delta, F)$ läuft auf Graphen:
+  - Jeder Knoten startet im Zustand $q_0$
+  - Jeder Knoten aktualisiert seinen Zustand basierend auf seinem *eigenen Zustand* und der *Multimenge* der Nachbarzustände:
     $q_v^t = delta(q_v^(t-1),, {{q_u^(t-1) | (v,u) in E}})$
-  - Node $v$ *accepts* iff $q_v^t in F$ for some $t$
+  - Knoten $v$ *akzeptiert*, wenn $q_v^t in F$ für ein $t$
 
-  *FCMPA* — finite state set $Q$ #h(2em) *CMPA* — countably infinite $Q$
+  *FCMPA* — endliche Zustandsmenge $Q$ #h(2em) *CMPA* — abzählbar unendliches $Q$
 ]
 
 #v(0.3em)
-CMPAs are like GNNs but with *discrete* states. This makes them easier to connect with logic.
+CMPAs sind wie GNNs, aber mit *diskreten* Zuständen. Das macht sie einfacher mit Logik zu verbinden.
+
+// ── SLIDE: CMPA as bridge ─────────────────────────────────────────────────────
+== CMPAs als Brücke: Warum der Umweg? #h(0.5em) #tom
+
+#v(0.3em)
+Eine direkte Übersetzung GNN[$FF$] → GMSC ist technisch sehr schwer. Der Umweg über FCMPA macht den Beweis handhabbar:
+
+#pause
+#v(0.5em)
+#align(center)[
+  #block(fill: sand, inset: (x: 2em, y: 1.2em), radius: 5pt, stroke: 0.5pt + navy)[
+    #grid(columns: (1fr, auto, 1fr), align: center + horizon, gutter: 0.8em,
+      [],
+      block(fill: sky, inset: (x: 1em, y: 0.6em), radius: 3pt,
+            stroke: 1pt + blue)[#text(weight: "bold")[GMSC]],
+      [],
+    )
+    #v(0.5em)
+    #grid(columns: (1fr, auto, 1fr), align: center + horizon, gutter: 0.8em,
+      block(fill: sky, inset: (x: 0.8em, y: 0.6em), radius: 3pt,
+            stroke: 1pt + blue)[#text(weight: "bold")[GNN[$FF$]]],
+      text(size: 1.2em, fill: luma(120))[↗ #h(0.3em) ↖],
+      block(fill: sky, inset: (x: 0.8em, y: 0.6em), radius: 3pt,
+            stroke: 1pt + blue)[#text(weight: "bold")[FCMPA]],
+    )
+    #v(0.3em)
+    #text(size: 0.8em, fill: luma(100), style: "italic")[direkter Weg: schwer #h(3em) Umweg: machbar]
+  ]
+]
+
+#pause
+#v(0.4em)
+- *GNN[$FF$] → FCMPA:* Gleitkommazahlen sind bounded (Prop. 2.3) → endlich viele unterscheidbare Zustände
+#pause
+- *FCMPA → GMSC:* Diskrete Zustände + endliche Zustandsmenge → direkte logische Kodierung der Übergänge
+#pause
+- *GMSC → GNN[$FF$]:* Rekursive Formeln simulierbar durch iterierende Gewichtsmatrizen
 
 // ── SLIDE: The three-way correspondence ──────────────────────────────────────
-== The Three-Way Correspondence
+== Die Dreifachkorrespondenz
 
 #v(0.3em)
-The key insight: GNNs, automata, and logics form a *tight triangle*:
+Die Schlüsselerkenntnis: GNNs, Automaten und Logiken bilden ein *enges Dreieck*:
 
 #v(0.4em)
 #align(center)[
@@ -690,205 +922,237 @@ The key insight: GNNs, automata, and logics form a *tight triangle*:
   ]
 ]
 
+#pause
 #v(0.4em)
-- GNN[$FF$] $<->$ FCMPA because floats have bounded counting (Prop.\ 2.3)
-- GNN[$RR$] $<->$ CMPA because reals can distinguish any multiset size exactly
-- Both automaton classes then connect to their respective logic
+- GNN[$FF$] $<->$ FCMPA, da Gleitkommazahlen beschränktes Zählen haben (Prop.\ 2.3)
+#pause
+- GNN[$RR$] $<->$ CMPA, da reelle Zahlen jede Multimengen-Größe exakt unterscheiden können
+#pause
+- Beide Automatenklassen verbinden sich dann mit ihrer jeweiligen Logik
 
 // ── SLIDE: Why GNN[R] > GNN[F] ───────────────────────────────────────────────
-== Why GNN[R] is Strictly More Powerful
+== Warum GNN[R] streng mächtiger ist
 
 #v(0.2em)
-*The counting argument:*
+*Das Zählargument* (unter der Bounded-Annahme aus Prop. 2.3):
 
 #v(0.2em)
 #block(fill: sky, stroke: (left: 3pt + blue), inset: (x: 0.9em, y: 0.65em), radius: 3pt)[
-  GNN[$RR$] can express: *"The number of out-neighbors is a prime."*
+  GNN[$RR$] kann ausdrücken: *„Die Anzahl der ausgehenden Nachbarn ist eine Primzahl."*
 
-  For any $U subset.eq NN$ — even *undecidable* ones — GNN[$RR$] can check whether the neighbor count lies in $U$.
+  Für jede $U subset.eq NN$ — sogar *unentscheidbare* — kann GNN[$RR$] prüfen, ob die Nachbaranzahl in $U$ liegt.
 ]
 
-#v(0.4em)
+#v(0.3em)
 #block(fill: rgb("#fff8e1"), stroke: (left: 3pt + amber), inset: (x: 0.9em, y: 0.65em), radius: 3pt)[
-  GNN[$FF$] with bound $k$ cannot distinguish graphs with $k$ vs.\ $k+1$ neighbors.
+  *Weil GNN[$FF$] bounded ist (Prop. 2.3):* Ab Schranke $k$ kann GNN[$FF$] Graphen mit $k$ gegenüber $k+1$ Nachbarn *nicht* unterscheiden — die Summe der Nachbar-Features stabilisiert sich.
 
-  So GNN[$FF$] *cannot* express primality of degree for arbitrary degree.
+  Daher kann GNN[$FF$] Primalität des Grades für beliebige Grade nicht ausdrücken.
 ]
 
-#v(0.4em)
-*Absolute result:* GNN[$FF$] $<$ GNN[$RR$]. \
-But the extra power of reals lies in properties no one ever needs in practice — which is the surprising result coming up in Section 4.
+#v(0.3em)
+*Absolutes Ergebnis:* GNN[$FF$] $<$ GNN[$RR$]. \
+Die Extrastärke der reellen Zahlen liegt in Eigenschaften, die in der Praxis niemand braucht — das überraschende Ergebnis aus Abschnitt 4.
 
 // ── SLIDE: Main Theorems ──────────────────────────────────────────────────────
-== Main Theorems
+== Hauptsätze
 
 #v(0.2em)
-#theorem([GNN[F] ≡ GMSC — Theorem 3.2 #h(0.3em) @ahvonen2024logical])[
-  The following have the *same expressive power* — absolutely, no background logic:
+#theorem([GNN[F] ≡ GMSC — Satz 3.2 #h(0.3em) @ahvonen2024logical])[
+  Das Folgende hat die *gleiche Ausdrucksstärke* — absolut, ohne Hintergrundlogik:
   $
     "GNN"[FF] quad equiv quad "R-simple AC-GNN"[FF] quad equiv quad "GMSC" quad equiv quad "FCMPA"
   $
 ]
 
+#pause
 #v(0.4em)
-#theorem([GNN[R] ≡ ω-GML — Theorem 3.4 #h(0.3em) @ahvonen2024logical])[
+#theorem([GNN[R] ≡ ω-GML — Satz 3.4 #h(0.3em) @ahvonen2024logical])[
   $
     "GNN"[RR] quad equiv quad "CMPA" quad equiv quad omega"-GML"
   $
-  ω-GML can define *undecidable* graph properties — so GNN[$RR$] is very powerful.
+  ω-GML kann *unentscheidbare* Grapheigenschaften definieren — daher ist GNN[$RR$] sehr mächtig.
 ]
 
-#v(0.3em)
-Both results are *absolute* — no relativization to a background logic required.
+#pause
+#v(0.2em)
+#remark[
+  *Bemerkenswert:* Das einfache R-simple-Modell (lineare Aggregation + ReLU\*) genügt bereits. GNN[F]s mit beliebig komplexerer Architektur lassen sich in äquivalente R-simple GNN[F]s übersetzen — das zeigt die theoretische Untergrenze für GNN-Architekturen.
+]
+
+#pause
+#v(0.2em)
+Beide Ergebnisse sind *absolut* — keine Relativierung gegenüber einer Hintergrundlogik erforderlich.
 
 // ══════════════════════════════════════════════════════════════════════════════
-// SECTION 4 — Characterizing GNNs over MSO  [Kevin]
+// ABSCHNITT 4 — GNNs über MSO-Eigenschaften  [Kevin]
 // ══════════════════════════════════════════════════════════════════════════════
-= GNNs over MSO Properties
+= GNNs über MSO-Eigenschaften
 
-== What is MSO? #h(0.5em) #kevin
+== Was ist MSO? #h(0.5em) #kevin
 
-MSO (Monadic Second-Order Logic) extends FO with *set quantification*:
-- FO: quantify over *elements* ($exists x$, $forall x$)
-- MSO: additionally quantify over *sets of elements* ($exists X$, $forall X$)
+MSO (Monadische Logik zweiter Stufe) erweitert FO um *Mengenquantifizierung*:
+- FO: Quantifizierung über *Elemente* ($exists x$, $forall x$)
+#pause
+- MSO: zusätzlich Quantifizierung über *Mengen von Elementen* ($exists X$, $forall X$)
 
+#pause
 #v(0.4em)
 #grid(columns: (1fr, 1fr), gutter: 1em,
   block(fill: sand, inset: 0.8em, radius: 3pt, stroke: 0.4pt + luma(200))[
-    *On graphs:*\
+    *Auf Graphen:*\
     #v(0.2em)
-    FO can say:\
-    "every node has a neighbor"\
+    FO kann sagen:\
+    „jeder Knoten hat einen Nachbarn"\
     #v(0.3em)
-    MSO can say:\
-    "the graph is bipartite"\
-    "there exists a path from $a$ to $b$"\
-    many global structural properties
+    MSO kann sagen:\
+    „der Graph ist bipartit"\
+    „es gibt einen Pfad von $a$ nach $b$"\
+    viele globale Struktureigenschaften
   ],
   block(fill: sand, inset: 0.8em, radius: 3pt, stroke: 0.4pt + luma(200))[
-    *On strings:*\
+    *Auf Zeichenketten:*\
     #v(0.2em)
-    FO $equiv$ star-free regular languages\
+    FO $equiv$ sternfreie reguläre Sprachen\
     #v(0.3em)
-    MSO $equiv$ all regular languages\
+    MSO $equiv$ alle regulären Sprachen\
     #v(0.3em)
-    (a clean, well-known correspondence)
+    (eine klare, bekannte Korrespondenz)
   ],
 )
 
 #v(0.3em)
-MSO is in a sense the *natural* logic for graphs — it captures almost all properties one cares about in practice.
+MSO ist gewissermaßen die *natürliche* Logik für Graphen — sie erfasst nahezu alle Eigenschaften, die in der Praxis relevant sind.
 
 // ── SLIDE: More MSO examples ──────────────────────────────────────────────────
-== MSO — What It Can Express
+== MSO — Was es ausdrücken kann
 
 #v(0.2em)
-MSO-expressible graph properties include:
+MSO-ausdrückbare Grapheigenschaften umfassen:
 
 #grid(columns: (1fr, 1fr), gutter: 0.8em,
   list(
-    [Connectivity],
-    [$k$-colorability],
-    [Hamiltonicity],
-    [Bipartiteness],
+    [Zusammenhang],
+    [$k$-Färbbarkeit],
+    [Hamiltonizität],
+    [Bipartitheit],
   ),
   list(
-    [Planarity (for fixed genus)],
-    [Existence of a path between two labeled nodes],
-    [Many more natural structural properties],
+    [Planarität (bei festem Geschlecht)],
+    [Existenz eines Pfades zwischen zwei markierten Knoten],
+    [Viele weitere natürliche Struktureigenschaften],
   ),
 )
 
-#v(0.4em)
+#pause
+#v(0.3em)
+#example[
+  *Bipartitheit* als MSO-Formel — die Mengenquantifizierung $exists X$ wählt eine Knotenmenge (eine „Farbe"):
+  $
+    exists X. forall y. forall z. (E(y,z) -> (X(y) <-> not X(z)))
+  $
+  FO kann das *nicht* ausdrücken — FO quantifiziert nur über einzelne Elemente, nicht über Mengen.
+]
+
+#pause
+#v(0.2em)
 #remark[
-  MSO is *not* the limit of what GNNs can do. Section 3 showed GNN[$RR$] can go far beyond MSO. But MSO covers everything that matters in practice.
+  MSO ist *nicht* die Grenze dessen, was GNNs leisten können. Abschnitt 3 zeigte, dass GNN[$RR$] weit über MSO hinausgehen kann. Aber MSO deckt alles ab, was in der Praxis relevant ist.
 ]
 
 // ── SLIDE: MSO — Theorem 4.1 and Proof Ingredients ───────────────────────────
-== MSO — Theorem 4.1 and Proof Ingredients #h(0.5em) #kevin
+== MSO — Satz 4.1 und Beweisbausteine #h(0.5em) #kevin
 
 #v(0.15em)
-#theorem([GNN[R] ≡ GMSC over MSO — Thm. 4.1 @ahvonen2024logical])[
-  For any MSO-expressible $cal(P)$:
+#theorem([GNN[R] ≡ GMSC über MSO — Satz 4.1 @ahvonen2024logical])[
+  Für jede MSO-ausdrückbare Eigenschaft $cal(P)$:
   $cal(P) in "GNN"[RR] arrow.l.r.double cal(P) in "GMSC"$\
-  Combined with Thm. 3.2: GNN[$FF$] $equiv$ GNN[$RR$] $equiv$ GMSC over all MSO properties.
+  Kombiniert mit Satz 3.2: GNN[$FF$] $equiv$ GNN[$RR$] $equiv$ GMSC über allen MSO-Eigenschaften.
 ]
 
+#pause
 #v(0.3em)
-*Two key proof ingredients:*
+*Beweisidee (Intuition):* GMSC/ω-GML sind bisimulationsinvariant — sie sehen nur Bäume. MSO auf Bäumen wird durch Paritätsbaumautomaten (PTAs) charakterisiert. Aus einem PTA baut man ein GMSC-Programm, das per Tiefenzertifikat prüft, ob der Baum akzeptiert wird.
+
+#pause
+#v(0.3em)
+*Zwei Schlüsselbeweiszutaten:*
 
 #v(0.2em)
 #grid(columns: (1fr, 1fr), gutter: 0.8em,
   block(fill: sky, stroke: (left: 3pt + blue), inset: (x: 0.8em, y: 0.6em), radius: 3pt)[
-    *1. Janin-Walukiewicz (Thm. 4.6):*\
+    *1. Janin-Walukiewicz (Satz 4.6):*\
     #v(0.1em)
-    GMSC / ω-GML are *modal* — invariant under tree unraveling.
-    For $cal(P) in "MSO" inter omega"-GML"$, there is a PTA $cal(A)$ s.t.\
+    GMSC / ω-GML sind *modal* — invariant unter Baumaufrollen.
+    Für $cal(P) in "MSO" inter omega"-GML"$ gibt es einen PTA $cal(A)$, sodass\
     $(G, w) in cal(P) arrow.l.r U(G,w) in L(cal(A))$
   ],
   block(fill: mint, stroke: (left: 3pt + sage), inset: (x: 0.8em, y: 0.6em), radius: 3pt)[
-    *2. $k$-prefix decorations (Lem. 4.7):*\
+    *2. $k$-Präfixdekorationen (Lem. 4.7):*\
     #v(0.1em)
-    A depth-$k$ map $mu: V_k -> cal(P)(Q)$ of PTA states — *finite certificate* for $T in L(cal(A))$.\
-    $T in L(cal(A)) arrow.l.r exists k in NN: T "has a " k"-prefix dec."$\
-    *GMSC:* round $k$ checks the depth-$k$ certificate.
+    Eine Tiefe-$k$-Abbildung $mu: V_k -> cal(P)(Q)$ von PTA-Zuständen — *endliches Zertifikat* für $T in L(cal(A))$.\
+    $T in L(cal(A)) arrow.l.r exists k in NN: T "hat eine " k"-Präfixdek."$\
+    *GMSC:* Runde $k$ überprüft das Tiefe-$k$-Zertifikat.
   ],
 )
 
 // ── SLIDE: The MSO Collapse Theorem ──────────────────────────────────────────
-== The MSO Collapse Theorem
+== Das MSO-Kollapstheorem
 
 #v(0.2em)
-#theorem([MSO Collapse — Theorem 4.3 #h(0.3em) @ahvonen2024logical])[
-  For any property $cal(P)$ expressible in MSO:
+#theorem([MSO-Kollaps — Satz 4.3 #h(0.3em) @ahvonen2024logical])[
+  Für jede in MSO ausdrückbare Eigenschaft $cal(P)$:
   $
-    cal(P) "expressible as GNN"[RR] quad arrow.l.r.double quad cal(P) "expressible as GNN"[FF]
+    cal(P) "ausdrückbar als GNN"[RR] quad arrow.l.r.double quad cal(P) "ausdrückbar als GNN"[FF]
   $
-  Both are further captured by GMSC. This also holds for constant-iteration GNNs.
+  Beide werden zusätzlich durch GMSC erfasst. Dies gilt auch für Konstantiterations-GNNs.
 ]
 
+#pause
 #v(0.4em)
 #grid(columns: (1fr, 1fr), gutter: 1em,
   block(fill: rgb("#ffebee"), stroke: 1pt + rgb("#f44336"), inset: 0.8em, radius: 3pt)[
-    *Absolutely:* GNN[$RR$] $>$ GNN[$FF$]\
+    *Absolut:* GNN[$RR$] $>$ GNN[$FF$]\
     #v(0.2em)
-    Extra power: "degree is prime", undecidable properties.
+    Zusätzliche Stärke: „Grad ist Primzahl", unentscheidbare Eigenschaften.
   ],
   block(fill: mint, stroke: 1pt + sage, inset: 0.8em, radius: 3pt)[
-    *Relative to MSO:* GNN[$RR$] $=$ GNN[$FF$]\
+    *Relativ zu MSO:* GNN[$RR$] $=$ GNN[$FF$]\
     #v(0.2em)
-    For all practically relevant properties, floats are *just as good*.
+    Für alle praktisch relevanten Eigenschaften sind Gleitkommazahlen *genauso gut*.
   ],
 )
 
 // ── SLIDE: Intuition for the proof ───────────────────────────────────────────
-== Why the Gap Vanishes — Intuition
+== Warum der Unterschied verschwindet — Intuition
 
 #v(0.2em)
-The proof goes via *Parity Tree Automata (PTAs)* — which characterize MSO on tree-structured graphs (Janin–Walukiewicz theorem):
+Der Beweis geht über *Paritätsbaumautomaten (PTAs)* — die MSO auf baumstrukturierten Graphen charakterisieren (Janin–Walukiewicz-Theorem):
 
 #v(0.3em)
 #align(center)[
   #block(fill: sand, inset: (x: 1.5em, y: 0.8em), radius: 4pt, stroke: 0.5pt + navy)[
-    MSO property $cal(P)$ $arrow.r$ PTA $A$ $arrow.r$ $k$-prefix decorations $arrow.r$ GMSC program $Lambda$
+    MSO-Eigenschaft $cal(P)$ $arrow.r$ PTA $A$ $arrow.r$ $k$-Präfixdekorationen $arrow.r$ GMSC-Programm $Lambda$
   ]
 ]
 
+#pause
 #v(0.4em)
-*Key insight:* The extra power of GNN[$RR$] lies entirely *outside* of MSO. \
-If $cal(P)$ is in MSO and expressible by GNN[$RR$], one can always find a GMSC program — and hence a GNN[$FF$] — for it.
+*Schlüsselerkenntnis:* Die zusätzliche Stärke von GNN[$RR$] liegt vollständig *außerhalb* von MSO. \
+Wenn $cal(P)$ in MSO liegt und durch GNN[$RR$] ausdrückbar ist, lässt sich stets ein GMSC-Programm — und damit ein GNN[$FF$] — dafür finden.
 
+#pause
 #v(0.3em)
 #block(fill: mint, stroke: (left: 3pt + sage), inset: (x: 0.9em, y: 0.65em), radius: 3pt)[
-  *Practical consequence:* Theoretical analyses with $RR$ are safe — for MSO properties the results transfer to floats. If a GNN doesn't learn an MSO-definable property, the problem is in training or architecture, not float precision.
+  *Praktische Konsequenz:* Theoretische Analysen mit $RR$ sind sicher — für MSO-Eigenschaften übertragen sich die Ergebnisse auf Gleitkommazahlen. Falls ein GNN eine MSO-definierbare Eigenschaft nicht lernt, liegt das Problem im Training oder der Architektur, nicht in der Gleitkommazahlgenauigkeit.
 ]
 
 // ══════════════════════════════════════════════════════════════════════════════
-// CONCLUSION  [Kevin & Tom]
+// FAZIT  [Kevin & Tom]
 // ══════════════════════════════════════════════════════════════════════════════
-= Summary
+= Zusammenfassung
 
-== Results at a Glance #h(0.5em) #kevin #h(0.2em) #tom
+== Ergebnisse im Überblick #h(0.5em) #kevin #h(0.2em) #tom
 
 #v(0.4em)
 #table(
@@ -897,44 +1161,59 @@ If $cal(P)$ is in MSO and expressible by GNN[$RR$], one can always find a GMSC p
   stroke: none,
   fill: (_, row) => if row == 0 { navy } else if calc.odd(row) { rgb("#f0f4f9") } else { white },
   table.hline(stroke: 0.5pt + navy),
-  [#text(fill: white, weight: "bold")[Setting]],
+  [#text(fill: white, weight: "bold")[Kontext]],
   [#text(fill: white, weight: "bold")[GNN[F]]],
   [#text(fill: white, weight: "bold")[GNN[R]]],
-  [#text(fill: white, weight: "bold")[Automaton]],
+  [#text(fill: white, weight: "bold")[Automat]],
   table.hline(stroke: 0.3pt + luma(200)),
-  [Absolute],         [≡ GMSC],  [≡ ω-GML],  [F: FCMPA, R: CMPA],
-  [Relative to MSO],  [≡ GMSC],  [≡ GMSC (!!)], [≡ FCMPA],
+  [Absolut],              [≡ GMSC],  [≡ ω-GML],     [F: FCMPA, R: CMPA],
+  [Relativ zu MSO],       [≡ GMSC],  [≡ GMSC (!!)], [≡ FCMPA],
   table.hline(stroke: 0.5pt + navy),
 )
 
+#pause
 #v(0.6em)
-*Key takeaway:*
-- Absolutely: GNN[$FF$] $<$ GNN[$RR$] — reals can express undecidable properties
-- Relative to MSO: GNN[$FF$] $equiv$ GNN[$RR$] — *theory and practice converge*
+*Fazit:*
+- Absolut: GNN[$FF$] $<$ GNN[$RR$] — reelle Zahlen können unentscheidbare Eigenschaften ausdrücken
+#pause
+- Relativ zu MSO: GNN[$FF$] $equiv$ GNN[$RR$] — *Theorie und Praxis konvergieren*
 
 // ── SLIDE: Open Questions ─────────────────────────────────────────────────────
-== Conclusion & Open Questions
+== Fazit & Offene Fragen
 
 #v(0.2em)
-*What we showed:*
-- Exact logical characterizations: GNN[$FF$] $equiv$ GMSC, GNN[$RR$] $equiv$ ω-GML
-- Both results are *absolute* — no background logic needed
-- The real–float gap *vanishes* for all MSO-definable properties
-- Floats lose nothing vs.\ reals for any property one would use in practice
+*Was wir gezeigt haben:*
+- Exakte logische Charakterisierungen: GNN[$FF$] $equiv$ GMSC, GNN[$RR$] $equiv$ ω-GML
+#pause
+- Beide Ergebnisse sind *absolut* — keine Hintergrundlogik erforderlich
+#pause
+- Der Reell-Gleitkomma-Unterschied *verschwindet* für alle MSO-definierbaren Eigenschaften
+#pause
+- Gleitkommazahlen verlieren gegenüber reellen Zahlen nichts für praktisch relevante Eigenschaften
 
+#pause
 #v(0.4em)
-*Open questions:*
-- *Termination:* How does a recurrent GNN learn *when* to stop? Not addressed.
-- *Global readout:* How does the characterization change with a global pooling layer?
-- *Complexity:* Is expressibility in GMSC decidable?
-- *Attention architectures:* Where do GAT / Transformer fit in this framework?
+*Offene Fragen:*
+- *Terminierung:* Wie lernt ein rekurrentes GNN *wann* es stoppen soll? Nicht behandelt.
+#pause
+- *Globales Auslesen:* Wie ändert sich die Charakterisierung durch eine globale Pooling-Schicht?
+#pause
+- *Komplexität:* Ist Ausdrückbarkeit in GMSC entscheidbar?
+#pause
+- *Aufmerksamkeitsarchitekturen:* Wo passen GAT / Transformer in diesen Rahmen?
+
+#pause
+#v(0.3em)
+#block(fill: sand, stroke: (left: 3pt + navy), inset: (x: 0.9em, y: 0.65em), radius: 3pt)[
+  *Verwandte Arbeit:* Pflüger et al. (NeurIPS 2024) @pfluger2024graded — ähnliche Fragestellung, aber andere Terminierungsbedingung. Ergebnis: gradierter $mu$-Kalkül. Die Ansätze sind *orthogonal* — keine enthält die andere.
+]
 
 // ══════════════════════════════════════════════════════════════════════════════
-// References
+// Referenzen
 // ══════════════════════════════════════════════════════════════════════════════
-= References
+= Referenzen
 
-== References
+== Referenzen
 
 #set text(size: 14pt)
 #bibliography("refs.bib", style: "ieee", title: none)
