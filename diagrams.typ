@@ -187,15 +187,8 @@
   line(w3, u2, ..oe); line(w4, u2, ..oe)
   line(w5, u3, ..oe); line(w6, u3, ..oe)
 
-  circle(v, radius: 1.75, fill: col-agg,
-         stroke: (paint: col-eedg, thickness: 1.3pt, dash: "dashed"))
-
   let ie = (stroke: (paint: col-eedg, thickness: 2.5pt), mark: (end: ">", size: 0.36))
   line(u1, v, ..ie); line(u2, v, ..ie); line(u3, v, ..ie)
-
-  content((-2.1,  1.65), text(size: 0.28cm, fill: col-msg)[$psi(bold(x)_(u_1)^((t-1)))$])
-  content((-2.1, -1.45), text(size: 0.28cm, fill: col-msg)[$psi(bold(x)_(u_2)^((t-1)))$])
-  content(( 2.2,  0.65), text(size: 0.28cm, fill: col-msg)[$psi(bold(x)_(u_3)^((t-1)))$])
 
   circle(w1, radius: 0.34, fill: col-out, stroke: none)
   content(w1, text(fill: white, size: 0.24cm, weight: "bold")[$w_1$])
@@ -212,25 +205,70 @@
 
   circle(u1, radius: 0.58, fill: col-inn, stroke: (paint: white, thickness: 1.8pt))
   content(u1, text(fill: white, size: 0.40cm, weight: "bold")[$u_1$])
-  content((-4.8,  3.0), text(size: 0.28cm, fill: col-inn)[$bold(x)_(u_1)^((t-1))$])
 
   circle(u2, radius: 0.58, fill: col-inn, stroke: (paint: white, thickness: 1.8pt))
   content(u2, text(fill: white, size: 0.40cm, weight: "bold")[$u_2$])
-  content((-4.8, -2.8), text(size: 0.28cm, fill: col-inn)[$bold(x)_(u_2)^((t-1))$])
 
   circle(u3, radius: 0.58, fill: col-inn, stroke: (paint: white, thickness: 1.8pt))
   content(u3, text(fill: white, size: 0.40cm, weight: "bold")[$u_3$])
-  content(( 5.1,  1.5), text(size: 0.28cm, fill: col-inn)[$bold(x)_(u_3)^((t-1))$])
 
   circle(v, radius: 0.85, fill: col-ctr, stroke: (paint: white, thickness: 2.8pt))
   content(v, text(fill: white, size: 0.58cm, weight: "bold")[$v$])
 
-  content((0,  2.5), text(size: 0.28cm, fill: col-ctr, style: "italic")[$bold(x)_v^((t-1))$])
-  content((0, -2.2), text(size: 0.30cm, fill: rgb("#4a88b8"), style: "italic")[AGG])
-
-  content((0, -3.5), text(size: 0.34cm, fill: col-ctr)[
-    $bold(x)_v^((t)) = "COM"lr((bold(x)_v^((t-1)),,  "AGG"({psi(bold(x)_u^((t-1)))}_u)))$
+  content((3.5, -1.7), text(size: 0.5cm, fill: col-ctr)[
+    $bold(v) <- "COM"lr((bold(v),  "AGG"({{bold(u_1), bold(u_2), bold(u_3)}})))$
   ])
+})
+
+#let reachability-example = canvas(length: 1.1cm, {
+  import draw: *
+
+  let v  = (0, 0)
+  let u1 = (-3.2,  2.2)
+  let u2 = (-3.2, -2.0)
+  let u3 = ( 3.5,  0.8)
+  let w1 = (-5.8,  3.5)
+  let w2 = (-6.0,  0.6)
+  let w3 = (-5.8, -2.9)
+  let w4 = (-0.8, -3.8)
+  let w5 = ( 5.7,  2.5)
+  let w6 = ( 5.9, -0.7)
+
+  let oe = (stroke: (thickness: 0.9pt))
+  line(w1, u1, ..oe); line(w2, u1, ..oe)
+  line(w3, u2, ..oe); line(w4, u2, ..oe)
+  line(w5, u3, ..oe); line(w6, u3, ..oe)
+
+  let ie = (stroke: (thickness: 2.5pt), mark: (end: ">", size: 0.36))
+  line(u1, v, ..ie); line(u2, v, ..ie); line(u3, v, ..ie)
+
+  circle(w1, radius: 0.34, fill: white, stroke: black)
+  content(w1, text(fill: black, size: 0.4cm, weight: "bold")[☕])
+  circle(w2, radius: 0.34, fill: white, stroke: black)
+  content(w2, text(fill: white, size: 0.24cm, weight: "bold")[$w_2$])
+  circle(w3, radius: 0.34, fill: white, stroke: black)
+  content(w3, text(fill: white, size: 0.24cm, weight: "bold")[$w_3$])
+  circle(w4, radius: 0.34, fill: white, stroke: black)
+  content(w4, text(fill: white, size: 0.24cm, weight: "bold")[$w_4$])
+  circle(w5, radius: 0.34, fill: white, stroke: black)
+  content(w5, text(fill: white, size: 0.24cm, weight: "bold")[$w_5$])
+  circle(w6, radius: 0.34, fill: white, stroke: black)
+  content(w6, text(fill: black, size: 0.4cm, weight: "bold")[☕])
+
+  circle(u1, radius: 0.58, fill: white, stroke: (paint: black, thickness: 1.8pt))
+  content(u1, text(fill: white, size: 0.40cm, weight: "bold")[$u_1$])
+
+  circle(u2, radius: 0.58, fill: white, stroke: (paint: black, thickness: 1.8pt))
+  content(u2, text(fill: white, size: 0.40cm, weight: "bold")[$u_2$])
+
+  circle(u3, radius: 0.58, fill: white, stroke: (paint: black, thickness: 1.8pt))
+  content(u3, text(fill: white, size: 0.40cm, weight: "bold")[$u_3$])
+
+  circle(v, radius: 0.85, fill: white, stroke: (paint: black, thickness: 2.8pt))
+  content(v, text(fill: black, size: 0.58cm, weight: "bold")[$v$])
+  circle(v, radius: 1.1, fill: none,
+         stroke: (paint: rgb(210, 200, 255), thickness: 2.8pt, dash: "dashed")
+  )
 })
 
 // ── Large RGNN reachability diagram ──────────────────────────────────────────

@@ -1,5 +1,5 @@
 #import "../helpers.typ": *
-#import "../diagrams.typ": gnn-big-diagram, relu-star-diagram
+#import "../diagrams.typ": gnn-big-diagram, relu-star-diagram, reachability-example
 
 // ══════════════════════════════════════════════════════════════════════════════
 // ABSCHNITT 2.1 — GNNs  [Tom]
@@ -7,10 +7,10 @@
 == GNNs #h(0.5em) #tom
 
 #v(0.2em)
-Aktualisierung von Merkmalsvektoren:
+Update von Feature-Vektoren:
 
 $
-  x_v^(t) = "COM" (x_v^(t-1), "AGG"( \{\{ x_u^(t-1) | (v,u) in E \}\} ) )
+  x_v^t = "COM" (x_v^(t-1), "AGG"( \{\{ x_u^(t-1) | (v,u) in E \}\} ) )
 $
 
 - *AGG* — aggregiert die Merkmalsvektoren der Nachbarn (z.B. Summe, Maximum)
@@ -29,17 +29,18 @@ $
   #gnn-big-diagram
 ]
 
-== R-einfache Aggregations-Kombinations-GNNs #tom
+== R-simple GNNs
 
-*R-einfache Aggregations-Kombinations-GNNs:*
+*R-simple GNNs:*
 
 $
-  x_v^(t) &= "COM" (x_v^(t-1), "AGG"( \{\{ x_u^(t-1) | (v,u) in E \}\} ) ) \
-  &= "ReLU*" (x_v^(t-1) dot bold(C) + sum_((v,u) in E) x_u^(t-1) dot bold(A) + bold(b) )
+  #let faded(x) = text(fill: gray, $#x$)
+  faded(x_v^(t) &= "COM" (x_v^(t-1), "AGG"( \{\{ x_u^(t-1) | (v,u) in E \}\} ) )) \
+  x_v^(t) &= "ReLU*" (x_v^(t-1) dot bold(C) + sum_((v,u) in E) x_u^(t-1) dot bold(A) + bold(b) )
 $
 $bold(A)$: Matrix, $bold(b)$: Bias-Vektor, $bold(C)$: Matrix.
 
-*ReLU\*:* gestutzte ReLU — klemmt den Ausgang auf $[0, 1]$
+*ReLU\*:* truncated ReLU — beschränkt Output auf $[0, 1]$.
 
 #v(0.3em)
 #align(center)[#relu-star-diagram]
@@ -48,7 +49,13 @@ $bold(A)$: Matrix, $bold(b)$: Bias-Vektor, $bold(C)$: Matrix.
 
 *Beispieleigenschaft:* _Ist Symbol $p$ von Knoten $v$ aus erreichbar?_
 
+#v(0.3em)
+#align(center)[#reachability-example]
+
+
 -> Wie lässt sich das über GNNs lösen?
+
+#pagebreak()
 
 Idee:
 - Initial erhält jeder Knoten mit Label $p$ den Merkmalswert 1.
@@ -58,7 +65,7 @@ Idee:
 - Akzeptierende Merkmalsvektoren $F = {1}$.
 
 
-Realisierbar als *R-einfaches Aggregations-Kombinations-GNN*:
+Realisierbar als *R-simple GNN*:
 $
   x_v^(t) = "ReLU*" (x_v^(t-1) + sum_((v,u) in E) x_u^(t-1) )
 $
