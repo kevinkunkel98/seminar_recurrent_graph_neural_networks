@@ -17,8 +17,8 @@
   [#text(fill: white, weight: "bold")[GNN[R]]],
   [#text(fill: white, weight: "bold")[Automat]],
   table.hline(stroke: 0.3pt + luma(200)),
-  [Absolut],              [≡ GMSC],  [≡ ω-GML],     [F: FCMPA, R: CMPA],
-  [Relativ zu MSO],       [≡ GMSC],  [≡ GMSC (!!)], [≡ FCMPA],
+  [Absolut], [≡ GMSC], [≡ ω-GML], [F: FCMPA, R: CMPA],
+  [Relativ zu MSO], [≡ GMSC], [≡ GMSC (!!)], [≡ FCMPA],
   table.hline(stroke: 0.5pt + navy),
 )
 
@@ -30,10 +30,12 @@
 - Relativ zu MSO: GNN[$FF$] $equiv$ GNN[$RR$] — *Theorie und Praxis konvergieren*
 
 // ── SLIDE: Fazit — Theorie, Silizium, Zukunft ────────────────────────────────
-== Fazit — Theorie, Silizium und die Zukunft #h(0.5em) #kevin #h(0.2em) #tom
+== Fazit und Ausblick #h(0.5em) #kevin #h(0.2em) #tom
 
 #v(0.2em)
-#grid(columns: (1fr, 1fr), gutter: 0.8em,
+#grid(
+  columns: (1fr, 1fr),
+  gutter: 0.8em,
   block(fill: sky, stroke: (left: 3pt + blue), inset: (x: 0.8em, y: 0.65em), radius: 3pt)[
     *Erkenntnisse des Papers*\
     #v(0.2em)
@@ -44,9 +46,10 @@
   block(fill: rgb("#fff8e1"), stroke: (left: 3pt + amber), inset: (x: 0.8em, y: 0.65em), radius: 3pt)[
     *Die Siliziumschranke*\
     #v(0.2em)
-    Jede GPU/TPU rechnet mit IEEE 754 Floats. Prop. 2.3 formalisiert genau das: Floats können ab Schranke $k$ nicht mehr zählen — eine *physikalische* Grenze in Silizium.\
-    #v(0.15em)
-    Das Paper zeigt: *Diese Schranke ist für die Praxis irrelevant.*
+    - Jede GPU/TPU rechnet mit IEEE 754 Floats
+    - Prop. 2.3 formalisiert: Floats können ab Schranke $k$ nicht mehr zählen
+    - Eine *physikalische* Grenze in Silizium.\
+    - *Diese Schranke ist für die Praxis irrelevant.*
   ],
 )
 

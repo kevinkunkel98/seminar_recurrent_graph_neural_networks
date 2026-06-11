@@ -10,7 +10,9 @@ MSO (Monadische Logik zweiter Stufe) erweitert FO um *Mengenquantifizierung*:
 - MSO: zusätzlich Quantifizierung über *Mengen von Elementen* ($exists X$, $forall X$)
 
 #v(0.3em)
-#grid(columns: (1fr, 1fr), gutter: 0.9em,
+#grid(
+  columns: (1fr, 1fr),
+  gutter: 0.9em,
   block(fill: sand, inset: 0.8em, radius: 3pt, stroke: 0.4pt + luma(200))[
     *Auf Graphen:* FO — „jeder Knoten hat einen Nachbarn"\
     #v(0.2em)
@@ -47,7 +49,9 @@ MSO (Monadische Logik zweiter Stufe) erweitert FO um *Mengenquantifizierung*:
 ]
 
 #v(0.25em)
-*Beweisidee:* GMSC/ω-GML sehen nur Bäume (bisimulationsinvariant). MSO auf Bäumen ↔ Paritätsbaumautomaten (PTAs). Aus einem PTA baut man ein GMSC-Programm per Tiefenzertifikat:
+- *Beweisidee:* GMSC/ω-GML sehen nur Bäume (bisimulationsinvariant)
+- MSO auf Bäumen ↔ Paritätsbaumautomaten (PTAs)
+- Aus einem PTA baut man ein GMSC-Programm per Tiefenzertifikat:
 
 #v(0.1em)
 #align(center)[
