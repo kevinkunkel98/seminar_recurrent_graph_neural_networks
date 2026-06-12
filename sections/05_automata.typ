@@ -9,7 +9,7 @@
   Ein CMPA $(Q, q_0, delta, F)$ läuft auf Graphen:
   - Jeder Knoten startet im Zustand $q_0$
   - Jeder Knoten aktualisiert seinen Zustand basierend auf seinem *eigenen Zustand* und der *Multimenge* der Nachbarzustände:
-    $q_v^t = delta(q_v^(t-1),, {{q_u^(t-1) | (v,u) in E}})$
+    $q_v^t = delta(q_v^(t-1), , {{q_u^(t-1) | (v,u) in E}})$
   - Knoten $v$ *akzeptiert*, wenn $q_v^t in F$ für ein $t$
 
   *FCMPA* — endliche Zustandsmenge $Q$ #h(2em) *CMPA* — abzählbar unendliches $Q$
@@ -32,13 +32,17 @@ GNNs, Automaten und Logiken bilden ein *enges Dreieck*. Warum der Umweg über CM
 #v(0.3em)
 #align(center)[
   #block(fill: sand, inset: (x: 1.5em, y: 1em), radius: 4pt, stroke: 0.5pt + navy)[
-    #grid(columns: (1fr, auto, 1fr), align: center + horizon, gutter: 1em,
-      block(fill: sky, inset: 0.7em, radius: 3pt)[GNN[$FF$]],
-      $<->$,
-      block(fill: sky, inset: 0.7em, radius: 3pt)[FCMPA],
+    #grid(
+      columns: (1fr, auto, 1fr),
+      align: center + horizon,
+      gutter: 1em,
+      block(fill: sky, inset: 0.7em, radius: 3pt)[GNN[$FF$]], $<->$, block(fill: sky, inset: 0.7em, radius: 3pt)[FCMPA],
     )
     #v(0.3em)
-    #grid(columns: (1fr, auto, 1fr), align: center + horizon, gutter: 1em,
+    #grid(
+      columns: (1fr, auto, 1fr),
+      align: center + horizon,
+      gutter: 1em,
       block(fill: mint, inset: 0.7em, radius: 3pt)[GNN[$RR$]],
       $<->$,
       block(fill: mint, inset: 0.7em, radius: 3pt)[CMPA],
@@ -70,7 +74,7 @@ GNNs, Automaten und Logiken bilden ein *enges Dreieck*. Warum der Umweg über CM
   $
 ]
 
-== Beweis GNN[ℝ] ⇔ 𝜔-GML
+== Beweis GNN[$RR$] $<=>$ $omega$-GML
 
 //- GNNs mit
 //  - unendlich vielen Zuständen $Q$
@@ -94,7 +98,7 @@ Schrittweise Baum aufbauen:
 #v(1em)
 Formel prüfen:
 - GNN erstellt Schritt für Schritt die konzentrische Map.
-  Jedes Mal überprüft es, ob die aktuelle Map in der „unendlich langen Liste“ der omega-GML-Formel ist.
+  Jedes Mal überprüft es, ob die aktuelle Map in der „unendlich langen Liste“ der $omega$-GML-Formel ist.
 - Falls ja, hält es an.
 
 #pagebreak()
@@ -112,26 +116,28 @@ In der Praxis *Gleitkommazahlen* (F) statt reellen Zahlen!
 Floats sind *endlich*! #h(0.5em) #highlight(fill: rgb("#aaffaa"), radius: 50pt, extent: 5pt)[Python Demo]
 
 #v(0.2em)
-#grid(columns: (1fr, 1fr), gutter: 1.0em,
-    block(fill: rgb("#fff8e1"), stroke: (left: 3pt + amber), inset: (x: 0.9em, y: 0.65em), radius: 3pt)[
-      *Problem 1:* Addition ist nicht assoziativ.
+#grid(
+  columns: (1fr, 1fr),
+  gutter: 1.0em,
+  block(fill: rgb("#fff8e1"), stroke: (left: 3pt + amber), inset: (x: 0.9em, y: 0.65em), radius: 3pt)[
+    *Problem 1:* Addition ist nicht assoziativ.
 
-      $
-      (-1.00 + 1.00) + 0.01 &= 0.00 + 0.01 = 0.01 \
-      -1.00 + (1.00 + 0.01) &= -1.00 + 1.00 = 0
-      $
+    $
+      (-1.00 + 1.00) + 0.01 & = 0.00 + 0.01 = 0.01 \
+      -1.00 + (1.00 + 0.01) & = -1.00 + 1.00 = 0
+    $
 
-      $->$ Isomorphie-Cheating möglich!
-    ],
-    block(fill: rgb("#fff8e1"), stroke: (left: 3pt + amber), inset: (x: 0.9em, y: 0.65em), radius: 3pt)[
-      *Problem 2:* Nur endliches Zählen.
+    $->$ Isomorphie-Cheating möglich!
+  ],
+  block(fill: rgb("#fff8e1"), stroke: (left: 3pt + amber), inset: (x: 0.9em, y: 0.65em), radius: 3pt)[
+    *Problem 2:* Nur endliches Zählen.
 
-      $
-        "SUM"_"F" (M) = "SUM"_"F" (M|_k)
-      $
+    $
+      "SUM"_"F" (M) = "SUM"_"F" (M|_k)
+    $
 
-      $->$ Gleitkommazahlen können nicht über eine feste Grenze hinaus zählen.
-    ]
+    $->$ Gleitkommazahlen können nicht über eine feste Grenze hinaus zählen.
+  ],
 )
 
 Wir lösen nur Problem 1 durch _Summen-Konvention_.
@@ -164,7 +170,9 @@ Logik:
 == Absolut vs. MSO
 
 #v(0.3em)
-#grid(columns: (1fr, 1fr), gutter: 0.8em,
+#grid(
+  columns: (1fr, 1fr),
+  gutter: 0.8em,
   block(fill: rgb("#ffebee"), stroke: 1pt + rgb("#f44336"), inset: 0.8em, radius: 3pt)[
     *Absolut:* GNN[$RR$] $>$ GNN[$FF$]\
     #v(0.15em)
