@@ -117,8 +117,8 @@ Floats sind *endlich*! #h(0.5em) #highlight(fill: rgb("#aaffaa"), radius: 50pt, 
       *Problem 1:* Addition ist nicht assoziativ.
 
       $
-      1 + (-1) + 0.01 &= 0.01 \
-      (1 + 0.01) + (-1) &= 1.0 + (-1) = 0
+      (-1.00 + 1.00) + 0.01 &= 0.00 + 0.01 = 0.01 \
+      -1.00 + (1.00 + 0.01) &= -1.00 + 1.00 = 0
       $
 
       $->$ Isomorphie-Cheating möglich!
