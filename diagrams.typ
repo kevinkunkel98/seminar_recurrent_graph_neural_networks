@@ -34,7 +34,7 @@
   circle((1.5, 1.5), radius: 0.07, fill: col-hi, stroke: none)
 
   content((2.5, 1.85), text(size: 0.30cm, fill: col-fn, weight: "bold")[ReLU\*])
-  content((2.5, 0.85), text(size: 0.24cm, fill: luma(90), style: "italic")[= min(1, max(0, x))])
+  content((2.5, 0.85), text(size: 0.24cm, fill: luma(90), style: "italic")[\= min(1, max(0, x))])
 })
 
 // ── GNN diagram for title slide ───────────────────────────────────────────────
@@ -168,8 +168,6 @@
   let col-out  = rgb("#5b87b3")
   let col-eedg = rgb("#7fa8cc")
   let col-oedg = rgb("#aecbe0")
-  let col-msg  = rgb("#b7770d")
-  let col-agg  = rgb("#dce9f7")
 
   let v  = (0, 0)
   let u1 = (-3.2,  2.2)

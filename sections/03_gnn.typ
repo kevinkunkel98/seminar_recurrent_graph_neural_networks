@@ -4,113 +4,72 @@
 // ══════════════════════════════════════════════════════════════════════════════
 // ABSCHNITT 2.1 — GNNs  [Tom]
 // ══════════════════════════════════════════════════════════════════════════════
-== GNNs #h(0.5em) #tom
-
-#v(0.2em)
-Update von Feature-Vektoren:
-
-$
-  x_v^t = "COM" (x_v^(t-1), "AGG"( \{\{ x_u^(t-1) | (v,u) in E \}\} ) )
-$
-
-- *AGG* — aggregiert die Merkmalsvektoren der Nachbarn (z.B. Summe, Maximum)
-
-- *COM* — kombiniert den eigenen Vektor mit dem aggregierten Ergebnis (z.B. MLP)
-
-#v(0.5em)
-
-#remark[
-  Ungewöhnliche Konvention: Vektoren werden von *ausgehenden Nachbarn* gesammelt!
-]
 
 == Message Passing GNNs #h(0.5em) #tom
 
-#align(center + horizon)[
+#align(center)[
   #gnn-big-diagram
 ]
 
-== R-simple GNNs
+Update: $x_v^t = "COM" (x_v^(t-1), "AGG"( \{\{ x_u^(t-1) | (v,u) in E \}\} ) )$.
 
-*R-simple GNNs:*
+- *AGG* — aggregiert Feature-Vektoren der Nachbarn.
+- *COM* — kombiniert eigenen Feature-Vektor mit aggregiertem Ergebnis.
+
+== Node Properties #tom
+
+*Beispiel:* _Ist Symbol ☕ von Knoten $v$ aus erreichbar?_
+
+#v(0.3em)
+#align(center)[#reachability-example]
+
+
+Wie lässt sich das mit einem GNN lösen?
+
+#pagebreak()
+
+Lösung:
+- *Initial*: Jeder Knoten mit Label ☕ erhält Feature-Vektor 1, der Rest 0.
+
+- *Update*: Setze auf 1, wenn Knoten selbst oder mind. ein Nachbar den Feature-Vektor 1 hat.
+
+- *Akzeptieren:* Sobald Feature-Vektor der Node 1 ist.
+
+== Constant oder Recurrent?
+
+#v(0.2em)
+#grid(columns: (1fr, 1fr), gutter: 1.0em,
+  block(stroke: 1pt + blue, fill: sky, inset: 0.8em, radius: 3pt, width: 100%)[
+    #text(weight: "bold", fill: blue)[Constant-Iteration GNN]\
+    #v(0.3em)
+    Läuft genau $N$ Runden.
+    Nach $N$ Runden akzeptieren oder ablehnen.
+  ],
+  block(stroke: 1pt + sage, fill: mint, inset: 0.8em, radius: 3pt, width: 100%)[
+    #text(weight: "bold", fill: sage)[Rekurrentes GNN]\
+    #v(0.3em)
+    Läuft so lange, bis ein Knoten einen akzeptierenden Zustand erreicht.
+  ],
+)
+
+#v(0.35em)
+Beide können verwendet werden, um eine *Node Property* auszudrücken.
+
+== R-simple GNNs #tom
 
 $
   #let faded(x) = text(fill: gray, $#x$)
   faded(x_v^(t) &= "COM" (x_v^(t-1), "AGG"( \{\{ x_u^(t-1) | (v,u) in E \}\} ) )) \
   x_v^(t) &= "ReLU*" (x_v^(t-1) dot bold(C) + sum_((v,u) in E) x_u^(t-1) dot bold(A) + bold(b) )
 $
-$bold(A)$: Matrix, $bold(b)$: Bias-Vektor, $bold(C)$: Matrix.
+$bold(A)$: Matrix, $bold(b)$: Bias-Vektor, $bold(C)$: Matrix, $"ReLU*"$: Truncated ReLU.
 
-*ReLU\*:* truncated ReLU — beschränkt Output auf $[0, 1]$.
-
-#v(0.3em)
 #align(center)[#relu-star-diagram]
 
-== Knoteneigenschaften #tom
-
-*Beispieleigenschaft:* _Ist Symbol ☕ von Knoten $v$ aus erreichbar?_
-
-#v(0.3em)
-#align(center)[#reachability-example]
-
-
-Wie lässt sich das über GNNs lösen?
-
-#pagebreak()
-
-Lösung:
-- *Initial* erhält jeder Knoten mit Label ☕ den Feature-Vektor 1,
-  der Rest 0.
-
-- *Update*: Wenn Knoten selbst oder mindestens ein Nachbar den Feature-Vektor 1 hat, setze sich selbst auf 1.
-
-- *Akzeptierende* Feature-Vektoren $F = {1}$.
-
-
-#v(2em)
-Realisierbar als *R-simple GNN* (mit $bold(A)=1$, $bold(b)=0$, $bold(C)=1$):
+☕-Reachability realisierbar als *R-simple GNN* (mit $bold(A)=1$, $bold(b)=0$, $bold(C)=1$):
 $
   x_v^(t) = "ReLU*" (x_v^(t-1) + sum_((v,u) in E) x_u^(t-1) )
 $
-
-
-
-== Konstantiterations- vs. Rekurrente GNNs #tom
-
-#v(0.2em)
-#grid(columns: (1fr, 1fr), gutter: 1.0em,
-  block(stroke: 1pt + blue, fill: sky, inset: 0.8em, radius: 3pt, width: 100%)[
-    #text(weight: "bold", fill: blue)[Konstantiterations-GNN]\
-    #v(0.3em)
-    - Läuft genau $N$ Runden ($N$ als Hyperparameter)
-    - Nach $N$ Runden: Akzeptieren oder Ablehnen
-    - $x_v^N in F$
-    - *Problem:* $N$ muss vorab bekannt sein
-  ],
-  block(stroke: 1pt + sage, fill: mint, inset: 0.8em, radius: 3pt, width: 100%)[
-    #text(weight: "bold", fill: sage)[Rekurrentes GNN]\
-    #v(0.3em)
-    - Läuft bis ein Knoten einen *akzeptierenden* Zustand erreicht
-    - $x_v^t in F$ für *ein* $t in NN$
-    - Ein spezieller $bold("DONE")$-Vektor signalisiert das Ende
-    - Das GNN entscheidet *selbst*, wann es fertig ist
-  ],
-)
-
-#v(0.35em)
-Beide können verwendet werden, um eine *Knoteneigenschaft* auszudrücken.
-
-// ── Reachability als Trennbeispiel (neue Folie mit SVG) ───────────────────────
-== Reachability als Trennbeispiel #h(0.5em) #tom
-
-#v(0.2em)
-#block(fill: rgb("#fff8e1"), stroke: (left: 3pt + amber), inset: (x: 0.9em, y: 0.65em), radius: 3pt)[
-  *Reachability als Trennbeispiel:* Erreichbarkeit ist mit einem rekurrenten GNN ausdrückbar, aber mit *keinem* Konstantiterations-GNN — denn für jedes feste $N$ gibt es einen Graphen, in dem $p$ erst nach mehr als $N$ Schritten erreichbar ist. Das ist die zentrale Neuerung gegenüber Barceló et al. 2020 @barcelo2020logical.
-]
-
-#v(0.4em)
-#align(center)[
-  #image("../gnn_reachability.svg", width: 92%)
-]
 
 // ── GNN[F] vs. GNN[R] ─────────────────────────────────────────────────────────
 == GNN[F] vs. GNN[R] — Warum das wichtig ist
