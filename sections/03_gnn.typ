@@ -23,7 +23,7 @@ $
   Ungewöhnliche Konvention: Vektoren werden von *ausgehenden Nachbarn* gesammelt!
 ]
 
-== GNN — Visualisierung der Nachrichtenweiterleitung #h(0.5em) #tom
+== Message Passing GNNs #h(0.5em) #tom
 
 #align(center + horizon)[
   #gnn-big-diagram
@@ -47,30 +47,31 @@ $bold(A)$: Matrix, $bold(b)$: Bias-Vektor, $bold(C)$: Matrix.
 
 == Knoteneigenschaften #tom
 
-*Beispieleigenschaft:* _Ist Symbol $p$ von Knoten $v$ aus erreichbar?_
+*Beispieleigenschaft:* _Ist Symbol ☕ von Knoten $v$ aus erreichbar?_
 
 #v(0.3em)
 #align(center)[#reachability-example]
 
 
--> Wie lässt sich das über GNNs lösen?
+Wie lässt sich das über GNNs lösen?
 
 #pagebreak()
 
-Idee:
-- Initial erhält jeder Knoten mit Label $p$ den Merkmalswert 1.
+Lösung:
+- *Initial* erhält jeder Knoten mit Label ☕ den Feature-Vektor 1,
+  der Rest 0.
 
-- Update: Falls ein Nachbar den Wert 1 hat, setze sich selbst auf 1.
+- *Update*: Wenn Knoten selbst oder mindestens ein Nachbar den Feature-Vektor 1 hat, setze sich selbst auf 1.
 
-- Akzeptierende Merkmalsvektoren $F = {1}$.
+- *Akzeptierende* Feature-Vektoren $F = {1}$.
 
 
-Realisierbar als *R-simple GNN*:
+#v(2em)
+Realisierbar als *R-simple GNN* (mit $bold(A)=1$, $bold(b)=0$, $bold(C)=1$):
 $
   x_v^(t) = "ReLU*" (x_v^(t-1) + sum_((v,u) in E) x_u^(t-1) )
 $
 
-(durch Setzen von $bold(A)=1$, $bold(b)=0$, $bold(C)=1$.)
 
 
 == Konstantiterations- vs. Rekurrente GNNs #tom
