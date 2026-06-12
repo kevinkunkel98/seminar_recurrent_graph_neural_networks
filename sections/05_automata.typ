@@ -54,22 +54,93 @@ GNNs, Automaten und Logiken bilden ein *enges Dreieck*. Warum der Umweg über CM
 == Hauptsätze
 
 #v(0.2em)
-#theorem([GNN[F] ≡ GMSC — Satz 3.2 #h(0.3em) @ahvonen2024logical])[
-  Das Folgende hat die *gleiche Ausdrucksstärke* — absolut, ohne Hintergrundlogik:
+#theorem([GNN[R] und ω-GML])[
+  Das Folgende hat die *gleiche Ausdrucksstärke*:
   $
-    "GNN"[FF] quad equiv quad "R-simple AC-GNN"[FF] quad equiv quad "GMSC" quad equiv quad "FCMPA"
-  $
-]
-
-
-#v(0.4em)
-#theorem([GNN[R] ≡ ω-GML — Satz 3.4 #h(0.3em) @ahvonen2024logical])[
-  $
-    "GNN"[RR] quad equiv quad "CMPA" quad equiv quad omega"-GML"
+    "GNN"[RR] quad equiv quad omega"-GML"
   $
   ω-GML kann *unentscheidbare* Grapheigenschaften definieren — daher ist GNN[$RR$] sehr mächtig.
 ]
 
+#v(0.4em)
+#theorem([GNN[F] und GMSC])[
+  Das Folgende hat die *gleiche Ausdrucksstärke*:
+  $
+    "GNN[F]" quad equiv quad "R-simple GNN[F]" quad equiv quad "GMSC"
+  $
+]
+
+== Beweis GNN[ℝ] ⇔ 𝜔-GML
+
+//- GNNs mit
+//  - unendlich vielen Zuständen $Q$
+//  - unbounded counting $k$
+//  - reellen Zahlen $RR$
+//
+//  => omega-GML
+
+*$omega$-GML $->$ GNN[$RR$]*:
+
+Trick: *Tree Encoding* als Binärstring
+1. Anzahl Nodes unär kodieren: $1^n 0$
+2. alle $n$ Labels auflisten
+3. Adjazenzmatrix zeilenweise ($n^2$ Bits)
+
+Schrittweise Baum aufbauen:
+- Knoten erhält „Tree Encodings“ seiner Nachbarn.
+- `AGG` kombiniert zu größerem Baum
+- `COM` aktualisiert Label der neuen Wurzel entsprechend eigenem Label
+
+#v(1em)
+Formel prüfen:
+- GNN erstellt Schritt für Schritt die konzentrische Map.
+  Jedes Mal überprüft es, ob die aktuelle Map in der „unendlich langen Liste“ der omega-GML-Formel ist.
+- Falls ja, hält es an.
+
+#pagebreak()
+
+*$omega$-GML $->$ GNN[$RR$]*:
+
+(todo)
+
+== Floats
+
+(todo: was sind floats?)
+
+*Rundungsfehler:*
+
+(Python Demo)
+
+*Isomorphie:*
+
+cheating möglich
+
+== Beweis $"GNN"[F] <=> "R-simple GNNs" <=> "GMSC"$
+
+#v(2em)
+*GNN[F] $->$ GMSC:*
+
+Trivial. Nur endlich viele Zustandskombinationen bei Floats.
+
+#v(2em)
+*GMSC $->$ R-simple GNN:*
+
+Idee:
+- Regel = Eintrag im Feature-Vektor.
+  $->$ Verfolgt, ob Regel aktuell erfüllt.
+- Schrittweises Absteigen entlang der Formelstruktur.
+
+Synchronisation notwendig:
+- Je Regel unterschiedlich viele Schritte
+- GNN macht immer maximalen Schritt-Count.
+- GNN macht pro Logik-Schritt $D' + 1$ message rounds
+- Zähler erforderlich $->$ zweite Vektor-Hälfte.
+
+Logik:
+
+(todo)
+
+== Absolut vs. MSO
 
 #v(0.3em)
 #grid(columns: (1fr, 1fr), gutter: 0.8em,
