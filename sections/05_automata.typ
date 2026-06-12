@@ -54,26 +54,6 @@ GNNs, Automaten und Logiken bilden ein *enges Dreieck*. Warum der Umweg über CM
 - GNN[$FF$] $<->$ FCMPA — Floats sind bounded → endliche Zustandsmenge
 - GNN[$RR$] $<->$ CMPA — reelle Zahlen unterscheiden jede Nachbaranzahl exakt
 
-// ── SLIDE: Main Theorems ──────────────────────────────────────────────────────
-== Hauptsätze
-
-#v(0.2em)
-#theorem([GNN[R] und ω-GML])[
-  Das Folgende hat die *gleiche Ausdrucksstärke*:
-  $
-    "GNN"[RR] quad equiv quad omega"-GML"
-  $
-  ω-GML kann *unentscheidbare* Grapheigenschaften definieren — daher ist GNN[$RR$] sehr mächtig.
-]
-
-#v(0.4em)
-#theorem([GNN[F] und GMSC])[
-  Das Folgende hat die *gleiche Ausdrucksstärke*:
-  $
-    "GNN[F]" quad equiv quad "R-simple GNN[F]" quad equiv quad "GMSC"
-  $
-]
-
 == Beweis GNN[$RR$] $<=>$ $omega$-GML
 
 //- GNNs mit

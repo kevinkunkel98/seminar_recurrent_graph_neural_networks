@@ -58,6 +58,26 @@ Die Schlüsselformel $lozenge_(>= k) phi$ bedeutet: *„mindestens $k$ ausgehend
   $X^i = lozenge dots.c lozenge p$ (genau $i$ Rauten) = Erreichbarkeit in $i$ Schritten
 ]
 
+// ── SLIDE: Main Theorems ──────────────────────────────────────────────────────
+== Hauptsätze
+
+#v(0.2em)
+#theorem([GNN[R] und ω-GML])[
+  Das Folgende hat die *gleiche Ausdrucksstärke*:
+  $
+    "GNN"[RR] quad equiv quad omega"-GML"
+  $
+  ω-GML kann *unentscheidbare* Grapheigenschaften definieren — daher ist GNN[$RR$] sehr mächtig.
+]
+
+#v(0.4em)
+#theorem([GNN[F] und GMSC])[
+  Das Folgende hat die *gleiche Ausdrucksstärke*:
+  $
+    "GNN[F]" quad equiv quad "R-simple GNN[F]" quad equiv quad "GMSC"
+  $
+]
+
 // ── SLIDE: ω-GML and hierarchy ────────────────────────────────────────────────
 == ω-GML und die Logikhierarchie
 
