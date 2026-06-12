@@ -71,29 +71,3 @@ $
   x_v^(t) = "ReLU*" (x_v^(t-1) + sum_((v,u) in E) x_u^(t-1) )
 $
 
-// ── GNN[F] vs. GNN[R] ─────────────────────────────────────────────────────────
-== GNN[F] vs. GNN[R] — Warum das wichtig ist
-
-#v(0.2em)
-In der Praxis verwenden GNNs *Gleitkommazahlen* ($FF$). Die Theorie nimmt meist *reelle Zahlen* ($RR$) an.
-
-#v(0.3em)
-#block(fill: rgb("#fff8e1"), stroke: (left: 3pt + amber), inset: (x: 0.9em, y: 0.65em), radius: 3pt)[
-  *Das Gleitkommazahlenproblem:* Gleitkommazahlenaddition ist *nicht assoziativ*:
-  $(a + b) + c eq.not a + (b + c)$
-
-  In einem 2-Dezimalsystem: $1 + (-1) + 0.01 = 0.01$, aber $(1 + 0.01) + (-1) = 1.0 + (-1) = 0$\
-  da $1.01$ nicht darstellbar ist und gerundet wird.
-]
-
-#v(0.3em)
-*Folgerung* (Proposition 2.3): Für jedes Gleitkommazahlensystem $FF$ gibt es ein $k in NN$, sodass für alle Multimengen $M$ von Gleitkommazahlen gilt:
-$
-  "SUM"_FF (M) = "SUM"_FF (M|_k)
-$
-Nach $k$ Kopien eines Wertes machen weitere Kopien *keinen Unterschied* — Gleitkommazahlen können nicht über eine feste Grenze hinaus zählen.
-
-#v(0.3em)
-#block(fill: mint, stroke: (left: 3pt + sage), inset: (x: 0.9em, y: 0.6em), radius: 3pt)[
-  *Konvention:* Im Folgenden nehmen wir GNN[$FF$] stets als *bounded* im Sinne von Prop. 2.3 an. Genau diese Beschränkung macht GNN[$FF$] strikt schwächer als GNN[$RR$].
-]

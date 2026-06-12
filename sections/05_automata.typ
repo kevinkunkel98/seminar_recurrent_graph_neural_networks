@@ -105,15 +105,36 @@ Formel prüfen:
 
 == Floats
 
+In der Praxis *Gleitkommazahlen* (F) statt reellen Zahlen!
+
 (todo: was sind floats?)
 
-*Rundungsfehler:*
+Floats sind *endlich*! #h(0.5em) #highlight(fill: rgb("#aaffaa"), radius: 50pt, extent: 5pt)[Python Demo]
 
-(Python Demo)
+#v(0.2em)
+#grid(columns: (1fr, 1fr), gutter: 1.0em,
+    block(fill: rgb("#fff8e1"), stroke: (left: 3pt + amber), inset: (x: 0.9em, y: 0.65em), radius: 3pt)[
+      *Problem 1:* Addition ist nicht assoziativ.
 
-*Isomorphie:*
+      $
+      1 + (-1) + 0.01 &= 0.01 \
+      (1 + 0.01) + (-1) &= 1.0 + (-1) = 0
+      $
 
-cheating möglich
+      $->$ Isomorphie-Cheating möglich!
+    ],
+    block(fill: rgb("#fff8e1"), stroke: (left: 3pt + amber), inset: (x: 0.9em, y: 0.65em), radius: 3pt)[
+      *Problem 2:* Nur endliches Zählen.
+
+      $
+        "SUM"_"F" (M) = "SUM"_"F" (M|_k)
+      $
+
+      $->$ Gleitkommazahlen können nicht über eine feste Grenze hinaus zählen.
+    ]
+)
+
+Wir lösen nur Problem 1 durch _Summen-Konvention_.
 
 == Beweis $"GNN"[F] <=> "R-simple GNNs" <=> "GMSC"$
 
