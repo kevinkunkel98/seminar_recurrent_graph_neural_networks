@@ -5,7 +5,7 @@
 // ══════════════════════════════════════════════════════════════════════════════
 == Was ist MSO? #h(0.5em) #kevin
 
-MSO (Monadische Logik zweiter Stufe) erweitert FO um *Mengenquantifizierung*:
+MSO (Monadic Second Order Logic) erweitert FO um *Mengenquantifizierung*:
 - FO: Quantifizierung über *Elemente* ($exists x$, $forall x$)
 - MSO: zusätzlich Quantifizierung über *Mengen von Elementen* ($exists X$, $forall X$)
 
