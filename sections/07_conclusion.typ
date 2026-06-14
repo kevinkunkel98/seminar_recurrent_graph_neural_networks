@@ -56,16 +56,15 @@
   ],
 )
 
-#v(0.35em)
-#block(fill: mint, stroke: (left: 3pt + sage), inset: (x: 0.9em, y: 0.65em), radius: 3pt)[
-  *Was das für die Zukunft bedeutet:* Theoretische Analysen mit $RR$ gelten direkt für Hardware — Theoretiker und Ingenieure sprechen dieselbe Sprache. Wenn ein GNN eine Eigenschaft nicht lernt, liegt es am Training oder der Architektur. *Mehr Bits helfen nicht. Bessere Architekturen könnten.*
-]
+// #v(0.35em)
+// #block(fill: mint, stroke: (left: 3pt + sage), inset: (x: 0.9em, y: 0.65em), radius: 3pt)[
+//   *Was das für die Zukunft bedeutet:* Theoretische Analysen mit $RR$ gelten direkt für Hardware — Theoretiker und Ingenieure sprechen dieselbe Sprache. Wenn ein GNN eine Eigenschaft nicht lernt, liegt es am Training oder der Architektur. *Mehr Bits helfen nicht. Bessere Architekturen könnten.*
+// ]
 
-#v(0.3em)
-*Offene Fragen:*
-- *Terminierung:* Wann und wie lernt ein GNN zu stoppen? (Ungelöst)
-- *Attention:* Wo ordnen sich GAT / Transformer in dieses Framework ein?
-- Pflüger et al. @pfluger2024graded — verwandte Arbeit: gradierter $mu$-Kalkül, andere Terminierungsbedingung, *orthogonale* Theorie
+// #v(0.3em)
+// *Offene Fragen:*
+// - *Terminierung:* Wann und wie lernt ein GNN zu stoppen? (Ungelöst)
+// - *Attention:* Wo ordnen sich GAT / Transformer in dieses Framework ein?
 
 // ══════════════════════════════════════════════════════════════════════════════
 // Referenzen

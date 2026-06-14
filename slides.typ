@@ -69,3 +69,15 @@
 #include "sections/05_automata.typ"
 #include "sections/06_mso.typ"
 #include "sections/07_conclusion.typ"
+
+#slide(config: config-methods(header: _ => none, footer: _ => none))[
+  #align(center + horizon)[
+    #v(1fr)
+    #text(size: 36pt, weight: "bold", fill: navy)[Vielen Dank für Ihre Aufmerksamkeit!]
+    #v(0.6em)
+    #line(length: 40%, stroke: 1.5pt + navy)
+    #v(0.6em)
+    #text(size: 24pt, fill: luma(80))[Fragen?]
+    #v(1fr)
+  ]
+]
