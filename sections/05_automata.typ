@@ -51,7 +51,7 @@ GNNs, Automaten und Logiken bilden ein *enges Dreieck*. Warum der Umweg über CM
 ]
 
 #v(0.3em)
-- GNN[$FF$] $<->$ FCMPA — Floats sind bounded → endliche Zustandsmenge
+- GNN[F] $<->$ FCMPA — Floats sind bounded → endliche Zustandsmenge
 - GNN[$RR$] $<->$ CMPA — reelle Zahlen unterscheiden jede Nachbaranzahl exakt
 
 == Beweis GNN[$RR$] $<=>$ $omega$-GML
@@ -154,12 +154,12 @@ Logik:
   columns: (1fr, 1fr),
   gutter: 0.8em,
   block(fill: rgb("#ffebee"), stroke: 1pt + rgb("#f44336"), inset: 0.8em, radius: 3pt)[
-    *Absolut:* GNN[$RR$] $>$ GNN[$FF$]\
+    *Absolut:* GNN[$RR$] $>$ GNN[F]\
     #v(0.15em)
-    Beispiel: „Grad ist Primzahl" — GNN[$RR$] kann das, GNN[$FF$] nicht (bounded, Prop. 2.3).
+    Beispiel: „Grad ist Primzahl" — GNN[$RR$] kann das, GNN[F] nicht (bounded, Prop. 2.3).
   ],
   block(fill: mint, stroke: 1pt + sage, inset: 0.8em, radius: 3pt)[
-    *Relativ zu MSO:* GNN[$RR$] $=$ GNN[$FF$]\
+    *Relativ zu MSO:* GNN[$RR$] $=$ GNN[F]\
     #v(0.15em)
     Für alle praktisch relevanten Eigenschaften: Floats sind genauso gut. → Satz 4.3
   ],

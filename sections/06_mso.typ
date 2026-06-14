@@ -45,7 +45,7 @@ MSO (Monadic Second Order Logic) erweitert FO um *Mengenquantifizierung*:
   $
     cal(P) "ausdrückbar als GNN"[RR] quad arrow.l.r.double quad cal(P) "ausdrückbar als GNN"[FF]
   $
-  Kombiniert mit Satz 3.2: GNN[$FF$] $equiv$ GNN[$RR$] $equiv$ GMSC über allen MSO-Eigenschaften.
+  Kombiniert mit Satz 3.2: GNN[F] $equiv$ GNN[$RR$] $equiv$ GMSC über allen MSO-Eigenschaften.
 ]
 
 #v(0.25em)

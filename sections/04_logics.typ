@@ -4,15 +4,15 @@
 // ══════════════════════════════════════════════════════════════════════════════
 // ABSCHNITT 2.2 — Logiken  [Kevin]
 // ══════════════════════════════════════════════════════════════════════════════
-== Gradierte Modallogik (GML) #h(0.5em) #kevin
+== Graded Modal Logic (GML) #h(0.5em) #kevin
 
 #v(0.2em)
-GML ist Aussagenlogik, erweitert um *Zählmodalitäten*:
+- GML ist Aussagenlogik, erweitert um *Zählmodalitäten*:
 $
   phi ::= top mid p mid not phi mid phi and phi mid lozenge_(>= k) phi
 $
 
-Die Schlüsselformel $lozenge_(>= k) phi$ bedeutet: *„mindestens $k$ ausgehende Nachbarn erfüllen $phi$"*
+- Die Schlüsselformel $lozenge_(>= k) phi$ bedeutet: *„mindestens $k$ ausgehende Nachbarn erfüllen $phi$"*
 
 #v(0.3em)
 #example[
@@ -22,7 +22,7 @@ Die Schlüsselformel $lozenge_(>= k) phi$ bedeutet: *„mindestens $k$ ausgehend
 ]
 
 #v(0.3em)
-*Klassisches Ergebnis* @barcelo2020logical: Konstantiterations-GNNs $equiv$ GML (relativ zu FO-definierbaren Eigenschaften)
+- *Klassisches Ergebnis* @barcelo2020logical: Konstantiterations-GNNs $equiv$ GML (relativ zu FO-definierbaren Eigenschaften)
 
 // ── SLIDE: GMSC ───────────────────────────────────────────────────────────────
 == Graded Modal Substitution Calculus (GMSC)

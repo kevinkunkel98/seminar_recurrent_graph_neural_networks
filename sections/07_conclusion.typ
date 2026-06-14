@@ -25,9 +25,9 @@
 
 #v(0.6em)
 *Fazit:*
-- Absolut: GNN[$FF$] $<$ GNN[$RR$] — reelle Zahlen können unentscheidbare Eigenschaften ausdrücken
+- Absolut: GNN[F] $<$ GNN[$RR$] — reelle Zahlen können unentscheidbare Eigenschaften ausdrücken
 
-- Relativ zu MSO: GNN[$FF$] $equiv$ GNN[$RR$] — *Theorie und Praxis konvergieren*
+- Relativ zu MSO: GNN[F] $equiv$ GNN[$RR$] — *Theorie und Praxis konvergieren*
 
 // ── SLIDE: Fazit — Theorie, Silizium, Zukunft ────────────────────────────────
 == Fazit und Ausblick #h(0.5em) #kevin #h(0.2em) #tom
@@ -39,9 +39,9 @@
   block(fill: sky, stroke: (left: 3pt + blue), inset: (x: 0.8em, y: 0.65em), radius: 3pt)[
     *Erkenntnisse des Papers*\
     #v(0.2em)
-    - GNN[$FF$] $equiv$ GMSC, GNN[$RR$] $equiv$ ω-GML — erste *exakte* Charakterisierung rekurrenter GNNs
-    - Absolut: GNN[$RR$] $>$ GNN[$FF$] (Primalität, unentscheidbare Eigenschaften)
-    - Relativ zu MSO: GNN[$FF$] $=$ GNN[$RR$] — *Kollaps*
+    - GNN[F] $equiv$ GMSC, GNN[$RR$] $equiv$ ω-GML — erste *exakte* Charakterisierung rekurrenter GNNs
+    - Absolut: GNN[$RR$] $>$ GNN[F] (Primalität, unentscheidbare Eigenschaften)
+    - Relativ zu MSO: GNN[F] $=$ GNN[$RR$] — *Kollaps*
   ],
   block(fill: rgb("#fff8e1"), stroke: (left: 3pt + amber), inset: (x: 0.8em, y: 0.65em), radius: 3pt)[
     *Die Siliziumschranke*\
