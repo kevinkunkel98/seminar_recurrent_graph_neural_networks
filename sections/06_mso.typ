@@ -31,11 +31,6 @@ MSO (Monadic Second Order Logic) erweitert FO um *Mengenquantifizierung*:
   *Bipartitheit:* $exists X. forall y. forall z. (E(y,z) -> (X(y) <-> not X(z)))$ — FO kann das *nicht* (keine Mengenvariablen).
 ]
 
-#v(0.2em)
-#remark[
-  GNN[$RR$] geht weit über MSO hinaus (Satz 3.4). Aber MSO erfasst nahezu alles, was in der Praxis relevant ist.
-]
-
 // ── SLIDE: The MSO Collapse Theorem ──────────────────────────────────────────
 == Das MSO-Kollapstheorem #h(0.5em) #kevin
 
@@ -64,6 +59,30 @@ MSO (Monadic Second Order Logic) erweitert FO um *Mengenquantifizierung*:
 #block(fill: mint, stroke: (left: 3pt + sage), inset: (x: 0.9em, y: 0.65em), radius: 3pt)[
   *Schlüsselerkenntnis:* Die Extrastärke von GNN[$RR$] liegt vollständig *außerhalb* von MSO. Falls ein GNN eine MSO-Eigenschaft nicht lernt, liegt das am Training oder der Architektur — *nicht* an der Float-Präzision.
 ]
+
+// ── SLIDE: Proof Pipeline ─────────────────────────────────────────────────────
+== Das MSO-Kollapstheorem #h(0.5em) #kevin
+
+#v(0.5em)
+
+*1. $cal(P) arrow.r$ PTA $A$*
+- GMSC ist bisimulationsinvariant → wertet nur Baumfaltung $T_G(v)$ aus
+- MSO auf Bäumen $equiv$ Paritätsbaumautomaten (Rabin-Theorem)
+- ∴ zu $cal(P)$ existiert PTA $A$: $A$ akzeptiert $T_G(v)$ $arrow.l.r.double$ $cal(P)(G,v)$
+
+#v(0.4em)
+
+*2. PTA $A$ $arrow.r$ $k$-Präfixdekorationen*
+- PTA wertet Baumebenen *von Blättern zur Wurzel* aus
+- *Tiefe-$n$-Dekoration:* weise jedem Knoten der ersten $n$ Ebenen seinen PTA-Zustand zu
+- Falls $A$ akzeptiert: ∃ minimales $n^*$, ab dem Dekoration einen Akzeptanzzeugen enthält
+
+#v(0.4em)
+
+*3. $k$-Präfixdekorationen $arrow.r$ GMSC-Programm $Lambda$*
+- Variable $X_q$ pro PTA-Zustand $q$: $X_q^n(v) = 1$ $arrow.l.r.double$ $v$ hat in Tiefe-$n$-Dekoration Zustand $q$
+- Terminalklausel ($n=0$): GML-Formel für Blattbedingungen des PTA
+- Iterationsklausel: $lozenge_(>= k)$ propagiert Zustände — simuliert einen PTA-Übergangsschritt
 
 // == Absolut vs. MSO
 
