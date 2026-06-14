@@ -64,3 +64,21 @@ MSO (Monadic Second Order Logic) erweitert FO um *Mengenquantifizierung*:
 #block(fill: mint, stroke: (left: 3pt + sage), inset: (x: 0.9em, y: 0.65em), radius: 3pt)[
   *Schlüsselerkenntnis:* Die Extrastärke von GNN[$RR$] liegt vollständig *außerhalb* von MSO. Falls ein GNN eine MSO-Eigenschaft nicht lernt, liegt das am Training oder der Architektur — *nicht* an der Float-Präzision.
 ]
+
+// == Absolut vs. MSO
+
+// #v(0.3em)
+// #grid(
+//   columns: (1fr, 1fr),
+//   gutter: 0.8em,
+//   block(fill: rgb("#ffebee"), stroke: 1pt + rgb("#f44336"), inset: 0.8em, radius: 3pt)[
+//     *Absolut:* GNN[$RR$] $>$ GNN[F]\
+//     #v(0.15em)
+//     Beispiel: „Grad ist Primzahl" — GNN[$RR$] kann das, GNN[F] nicht (bounded, Prop. 2.3).
+//   ],
+//   block(fill: mint, stroke: 1pt + sage, inset: 0.8em, radius: 3pt)[
+//     *Relativ zu MSO:* GNN[$RR$] $=$ GNN[F]\
+//     #v(0.15em)
+//     Für alle praktisch relevanten Eigenschaften: Floats sind genauso gut. → Satz 4.3
+//   ],
+// )
