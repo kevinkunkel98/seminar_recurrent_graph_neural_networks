@@ -7,7 +7,8 @@
 
 #v(0.4em)
 #table(
-  columns: (auto, 1fr, 1fr, 1fr),
+  columns: (auto, 1fr, 1fr),
+  // 1fr),
   align: (left, center, center, center),
   stroke: none,
   fill: (_, row) => if row == 0 { navy } else if calc.odd(row) { rgb("#f0f4f9") } else { white },
@@ -15,10 +16,12 @@
   [#text(fill: white, weight: "bold")[Kontext]],
   [#text(fill: white, weight: "bold")[GNN[F]]],
   [#text(fill: white, weight: "bold")[GNN[R]]],
-  [#text(fill: white, weight: "bold")[Automat]],
+  // [#text(fill: white, weight: "bold")[Automat]],
   table.hline(stroke: 0.3pt + luma(200)),
-  [Absolut], [≡ GMSC], [≡ ω-GML], [F: FCMPA, R: CMPA],
-  [Relativ zu MSO], [≡ GMSC], [≡ GMSC (!!)], [≡ FCMPA],
+  [Absolut], [≡ GMSC], [≡ ω-GML],
+  // [F: FCMPA, R: CMPA],
+  [Relativ zu MSO], [≡ GMSC], [≡ GMSC (!!)],
+  // [≡ FCMPA],
   table.hline(stroke: 0.5pt + navy),
 )
 
