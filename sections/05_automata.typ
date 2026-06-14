@@ -3,56 +3,56 @@
 // ══════════════════════════════════════════════════════════════════════════════
 // ABSCHNITT 3 — GNNs und Logiken über Automaten  [Tom]
 // ══════════════════════════════════════════════════════════════════════════════
-== Verteilte Automaten — CMPA #h(0.5em) #tom
+// == Verteilte Automaten — CMPA #h(0.5em) #tom
 
-#definition([Zählender Nachrichtenweiterleitungsautomat (CMPA)])[
-  Ein CMPA $(Q, q_0, delta, F)$ läuft auf Graphen:
-  - Jeder Knoten startet im Zustand $q_0$
-  - Jeder Knoten aktualisiert seinen Zustand basierend auf seinem *eigenen Zustand* und der *Multimenge* der Nachbarzustände:
-    $q_v^t = delta(q_v^(t-1), , {{q_u^(t-1) | (v,u) in E}})$
-  - Knoten $v$ *akzeptiert*, wenn $q_v^t in F$ für ein $t$
+// #definition([Zählender Nachrichtenweiterleitungsautomat (CMPA)])[
+//   Ein CMPA $(Q, q_0, delta, F)$ läuft auf Graphen:
+//   - Jeder Knoten startet im Zustand $q_0$
+//   - Jeder Knoten aktualisiert seinen Zustand basierend auf seinem *eigenen Zustand* und der *Multimenge* der Nachbarzustände:
+//     $q_v^t = delta(q_v^(t-1), , {{q_u^(t-1) | (v,u) in E}})$
+//   - Knoten $v$ *akzeptiert*, wenn $q_v^t in F$ für ein $t$
 
-  *FCMPA* — endliche Zustandsmenge $Q$ #h(2em) *CMPA* — abzählbar unendliches $Q$
-]
+//   *FCMPA* — endliche Zustandsmenge $Q$ #h(2em) *CMPA* — abzählbar unendliches $Q$
+// ]
 
-#v(0.3em)
-CMPAs sind wie GNNs, aber mit *diskreten* Zuständen. Das macht sie einfacher mit Logik zu verbinden.
+// #v(0.3em)
+// CMPAs sind wie GNNs, aber mit *diskreten* Zuständen. Das macht sie einfacher mit Logik zu verbinden.
 
-// ── SLIDE: The three-way correspondence ──────────────────────────────────────
-== Die Dreifachkorrespondenz #h(0.5em) #tom
+// // ── SLIDE: The three-way correspondence ──────────────────────────────────────
+// == Die Dreifachkorrespondenz #h(0.5em) #tom
 
-#v(0.2em)
-GNNs, Automaten und Logiken bilden ein *enges Dreieck*. Warum der Umweg über CMPAs? Direktübersetzung GNN[$FF$] → GMSC ist technisch schwer — CMPAs machen es handhabbar:
+// #v(0.2em)
+// GNNs, Automaten und Logiken bilden ein *enges Dreieck*. Warum der Umweg über CMPAs? Direktübersetzung GNN[$FF$] → GMSC ist technisch schwer — CMPAs machen es handhabbar:
 
-#v(0.15em)
-#block(fill: sand, stroke: (left: 3pt + amber), inset: (x: 0.8em, y: 0.5em), radius: 3pt)[
-  GNN[$FF$] bounded (Prop. 2.3) → endlich viele Zustände → FCMPA → direkte logische Kodierung → GMSC
-]
+// #v(0.15em)
+// #block(fill: sand, stroke: (left: 3pt + amber), inset: (x: 0.8em, y: 0.5em), radius: 3pt)[
+//   GNN[$FF$] bounded (Prop. 2.3) → endlich viele Zustände → FCMPA → direkte logische Kodierung → GMSC
+// ]
 
-#v(0.3em)
-#align(center)[
-  #block(fill: sand, inset: (x: 1.5em, y: 1em), radius: 4pt, stroke: 0.5pt + navy)[
-    #grid(
-      columns: (1fr, auto, 1fr),
-      align: center + horizon,
-      gutter: 1em,
-      block(fill: sky, inset: 0.7em, radius: 3pt)[GNN[$FF$]], $<->$, block(fill: sky, inset: 0.7em, radius: 3pt)[FCMPA],
-    )
-    #v(0.3em)
-    #grid(
-      columns: (1fr, auto, 1fr),
-      align: center + horizon,
-      gutter: 1em,
-      block(fill: mint, inset: 0.7em, radius: 3pt)[GNN[$RR$]],
-      $<->$,
-      block(fill: mint, inset: 0.7em, radius: 3pt)[CMPA],
-    )
-  ]
-]
+// #v(0.3em)
+// #align(center)[
+//   #block(fill: sand, inset: (x: 1.5em, y: 1em), radius: 4pt, stroke: 0.5pt + navy)[
+//     #grid(
+//       columns: (1fr, auto, 1fr),
+//       align: center + horizon,
+//       gutter: 1em,
+//       block(fill: sky, inset: 0.7em, radius: 3pt)[GNN[$FF$]], $<->$, block(fill: sky, inset: 0.7em, radius: 3pt)[FCMPA],
+//     )
+//     #v(0.3em)
+//     #grid(
+//       columns: (1fr, auto, 1fr),
+//       align: center + horizon,
+//       gutter: 1em,
+//       block(fill: mint, inset: 0.7em, radius: 3pt)[GNN[$RR$]],
+//       $<->$,
+//       block(fill: mint, inset: 0.7em, radius: 3pt)[CMPA],
+//     )
+//   ]
+// ]
 
-#v(0.3em)
-- GNN[F] $<->$ FCMPA — Floats sind bounded → endliche Zustandsmenge
-- GNN[$RR$] $<->$ CMPA — reelle Zahlen unterscheiden jede Nachbaranzahl exakt
+// #v(0.3em)
+// - GNN[F] $<->$ FCMPA — Floats sind bounded → endliche Zustandsmenge
+// - GNN[$RR$] $<->$ CMPA — reelle Zahlen unterscheiden jede Nachbaranzahl exakt
 
 == Beweis GNN[$RR$] $<=>$ $omega$-GML
 
