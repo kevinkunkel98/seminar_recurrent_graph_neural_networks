@@ -21,6 +21,7 @@
     date: [Sommersemester 2026],
     institution: [Universität Leipzig — Seminar: Graph Neural Networks \ Betreuer: Prof. Carsten Lutz],
   ),
+  footer: [Leipzig, 19.06.2026],
 )
 
 #set text(size: 19pt)
