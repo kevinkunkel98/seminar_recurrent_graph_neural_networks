@@ -65,6 +65,12 @@
 
 *$omega$-GML $->$ GNN[$RR$]*:
 
+(todo)
+
+#pagebreak()
+
+*$omega$-GML $->$ GNN[$RR$]*:
+
 Trick: *Tree Encoding* als Binärstring
 1. Anzahl Nodes unär kodieren: $1^n 0$
 2. alle $n$ Labels auflisten
@@ -80,12 +86,6 @@ Formel prüfen:
 - GNN erstellt Schritt für Schritt die konzentrische Map.
   Jedes Mal überprüft es, ob die aktuelle Map in der „unendlich langen Liste“ der $omega$-GML-Formel ist.
 - Falls ja, hält es an.
-
-#pagebreak()
-
-*$omega$-GML $->$ GNN[$RR$]*:
-
-(todo)
 
 == Floats
 
@@ -128,6 +128,7 @@ Wir lösen nur Problem 1 durch _Summen-Konvention_.
 *GNN[F] $->$ GMSC:*
 
 Trivial. Nur endlich viele Zustandskombinationen bei Floats.
+(todo: genauer erklären)
 
 #v(2em)
 *GMSC $->$ R-simple GNN:*
@@ -145,9 +146,4 @@ Synchronisation notwendig:
 
 Logik:
 
-(todo)
-
-#v(0.2em)
-#remark[
-  Das einfache R-simple-Modell (lineare Aggregation + ReLU\*) genügt — beliebig komplexere GNN[F]-Architekturen lassen sich äquivalent übersetzen.
-]
+(todo. Bilder etc)
