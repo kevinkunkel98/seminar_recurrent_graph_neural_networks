@@ -1,5 +1,4 @@
 #import "../helpers.typ": *
-#import "../diagrams.typ": centre-point-diagram
 
 // ══════════════════════════════════════════════════════════════════════════════
 // ABSCHNITT 4 — GNNs über MSO-Eigenschaften  [Kevin]
@@ -31,27 +30,25 @@
 ]
 
 
-#v(0.25em)
-#grid(
-  columns: (1fr, auto),
-  gutter: 1.2em,
-  align: (left, center + horizon),
-  [
-    - *GMSC-Programm* ($X$ appointed):
-    #v(0.15em)
-    #block(fill: sand, stroke: 0.4pt + luma(200), inset: (x: 0.8em, y: 0.6em), radius: 3pt)[
-      ```
-      X(0) :− □⊥       // Basisfall: Sackgassen
-      X    :− ◇X ∧ □X  // Schritt rückwärts
-      ```
-    ]
-    #v(0.15em)
-    - $X^0 = square bot$ — wahr in Sackgassen ($square$ über leerem Nachbar-Set = wahr)
-    - $X^(n+1) = lozenge X^n and square X^n$ gilt in $v$ gdw. $v$ ≥1 Nachbar hat *und* alle Nachbarn $X^n$ erfüllen
-    - $X^n$ gilt in $v$ gdw. alle Pfade von $v$ haben Länge exakt $n$
-  ],
-  [#centre-point-diagram],
-)
+#v(0.4em)
+- *GMSC-Programm* ($X$ appointed):
+#v(0.3em)
+#align(center)[
+  #block(fill: sand, stroke: 0.4pt + luma(200), inset: (x: 1.4em, y: 0.85em), radius: 4pt)[
+    #grid(
+      columns: (auto, auto, auto),
+      column-gutter: 0.8em,
+      row-gutter: 0.6em,
+      align: (right, center, left),
+      [$X^((0))$], [:−], [$square bot$],
+      [$X$],       [:−], [$lozenge X and square X$],
+    )
+  ]
+]
+#v(0.3em)
+- $X^0 = square bot$ — wahr in Sackgassen ($square$ über leerem Nachbar-Set = wahr)
+- $X^(n+1) = lozenge X^n and square X^n$ gilt in $v$ gdw. $v$ ≥1 Nachbar hat *und* alle Nachbarn $X^n$ erfüllen
+- $X^n$ gilt in $v$ gdw. alle Pfade von $v$ haben Länge exakt $n$
 
 
 // #v(0.2em)
