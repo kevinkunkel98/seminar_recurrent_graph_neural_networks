@@ -47,11 +47,11 @@
     - Relativ zu MSO: GNN[F] $=$ GNN[$RR$] — *Kollaps*
   ],
   block(fill: rgb("#fff8e1"), stroke: (left: 3pt + amber), inset: (x: 0.8em, y: 0.65em), radius: 3pt)[
-    *Die Siliziumschranke*\
+    *Die Hardwareschranke*\
     #v(0.2em)
     - Jede GPU/TPU rechnet mit IEEE 754 Floats
     - Prop. 2.3 formalisiert: Floats können ab Schranke $k$ nicht mehr zählen
-    - Eine *physikalische* Grenze in Silizium.\
+    - Eine physikalische Grenze in Silizium\
     - *Diese Schranke ist für die Praxis irrelevant.*
   ],
 )
