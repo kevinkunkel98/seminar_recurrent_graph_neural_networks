@@ -1,8 +1,63 @@
 #import "../helpers.typ": *
+#import "../diagrams.typ": centre-point-diagram
 
 // ══════════════════════════════════════════════════════════════════════════════
 // ABSCHNITT 4 — GNNs über MSO-Eigenschaften  [Kevin]
 // ══════════════════════════════════════════════════════════════════════════════
+
+== MSO
+
+#v(0.1em)
+#remark[
+  GMSC $not subset$ MSO: es gibt Eigenschaften in GMSC, die MSO nicht ausdrücken kann. GMSC und $mu$-Kalkül sind *orthogonal* — keine enthält die andere.
+]
+
+
+#v(0.2em)
+#example[
+  *Auf Zeichenketten:*\
+  - FO $equiv$ sternfreie reguläre Sprachen #h(1em) MSO $equiv$ alle regulären Sprachen
+
+  *Auf Graphen:*\
+  - FO: „jeder Knoten hat einen Nachbarn" #h(1em)MSO: „der Graph ist bipartit", „Pfad von $a$ nach $b$"
+]
+
+// ── SLIDE: Centre-Point — GMSC ⊄ MSO ─────────────────────────────────────────
+== Centre-Point — GMSC ausdrückbar, MSO nicht #h(0.5em) #kevin
+
+#v(0.15em)
+#definition([Centre-Point (Bsp. 2.5 @ahvonen2024logical)])[
+  $(G, w)$ hat die *Centre-Point-Eigenschaft* gdw. es ein $n in NN$ gibt, sodass *jeder* gerichtete Pfad von $w$ nach genau $n$ Schritten in einer *Sackgasse* (Knoten ohne ausgehende Nachbarn) endet.
+]
+
+
+#v(0.25em)
+#grid(
+  columns: (1fr, auto),
+  gutter: 1.2em,
+  align: (left, center + horizon),
+  [
+    - *GMSC-Programm* ($X$ appointed):
+    #v(0.15em)
+    #block(fill: sand, stroke: 0.4pt + luma(200), inset: (x: 0.8em, y: 0.6em), radius: 3pt)[
+      ```
+      X(0) :− □⊥       // Basisfall: Sackgassen
+      X    :− ◇X ∧ □X  // Schritt rückwärts
+      ```
+    ]
+    #v(0.15em)
+    - $X^0 = square bot$ — wahr in Sackgassen ($square$ über leerem Nachbar-Set = wahr)
+    - $X^(n+1) = lozenge X^n and square X^n$ gilt in $v$ gdw. $v$ ≥1 Nachbar hat *und* alle Nachbarn $X^n$ erfüllen
+    - $X^n$ gilt in $v$ gdw. alle Pfade von $v$ haben Länge exakt $n$
+  ],
+  [#centre-point-diagram],
+)
+
+
+#v(0.2em)
+#remark[
+  Centre-Point $in$ GMSC $without$ MSO: MSO kann globale Tiefenuniformität nicht ausdrücken. Damit ist Satz 4.3 eine echte Einschränkung — der Kollaps gilt nur *innerhalb* von MSO.
+]
 == Was ist MSO? #h(0.5em) #kevin
 
 MSO (Monadic Second Order Logic) erweitert FO um *Mengenquantifizierung*:
