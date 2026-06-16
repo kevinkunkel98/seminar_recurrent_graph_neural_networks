@@ -61,7 +61,7 @@ $
 == Hauptsätze
 
 #v(0.4em)
-#theorem([GNN[F] und GMSC])[
+#theorem([1])[
   Das Folgende hat die *gleiche Ausdrucksstärke*:
   $
     "GNN[F]" quad equiv quad "R-simple GNN[F]" quad equiv quad "GMSC"
@@ -69,12 +69,19 @@ $
 ]
 
 #v(0.2em)
-#theorem([GNN[R] und ω-GML])[
+#theorem([2])[
   Das Folgende hat die *gleiche Ausdrucksstärke*:
   $
     "GNN"[RR] quad equiv quad omega"-GML"
   $
-  ω-GML kann *unentscheidbare* Grapheigenschaften definieren — daher ist GNN[$RR$] sehr mächtig.
+]
+
+#v(0.2em)
+#block(stroke: (paint: luma(160), dash: "dashed"), fill: luma(248), inset: (x: 0.9em, y: 0.7em), radius: 4pt, width: 100%)[
+  #text(fill: luma(130), weight: "bold")[Satz 3] #h(0.5em)
+  #text(fill: luma(130))[Kommt in Abschnitt 4 …]
+  #h(1fr)
+  #highlight(fill: luma(50))[#text(fill: luma(50))[GNN$[RR]$ $equiv$ GNN$[FF]$ über MSO-Eigenschaften]]
 ]
 
 // ── SLIDE: ω-GML and hierarchy ────────────────────────────────────────────────
@@ -89,6 +96,7 @@ $
 
 #v(0.3em)
 - Da GNN[R] mit reellen Zahlen *beliebig viele* Werte unterscheiden kann, benötigt es diese unendliche Ausdrucksstärke.
+- ω-GML kann *unentscheidbare* Grapheigenschaften definieren — daher ist GNN[$RR$] sehr mächtig.
 
 #v(0.4em)
 - *Ausdrucksstärke (semantische Inklusion, nicht syntaktisch):*

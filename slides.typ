@@ -5,6 +5,9 @@
 
 // ── Slide setup ───────────────────────────────────────────────────────────────
 #show: metropolis-theme.with(
+  footer-right: context {
+    if state("show-slide-number", true).get() { utils.slide-counter.display() }
+  },
   aspect-ratio: "16-9",
   config-colors(
     primary: navy,
@@ -31,8 +34,10 @@
 // SLIDE 1 — Titelfolie
 // ══════════════════════════════════════════════════════════════════════════════
 #slide(
-  config: config-methods(header: _ => none, footer: _ => none),
-  composer: (1fr, 1fr),
+  config: utils.merge-dicts(
+    config-methods(header: _ => none, footer: _ => none),
+    config-common(freeze-slide-counter: true),
+  ),
   align: horizon,
 )[
   #set align(left)
@@ -40,24 +45,23 @@
   #text(size: 10pt, fill: luma(140), tracking: 2pt)[SEMINAR · GRAPH NEURAL NETWORKS · SS 2026]
   #v(0.5em)
   #set par(leading: 0.75em)
-  #text(size: 32pt, weight: "bold", fill: navy)[Rekurrente Graph \ Neural Networks]
-  #v(0.35em)
-  #text(size: 15pt, fill: luma(70))[Logische Charakterisierungen mittels Modallogik]
+  #text(size: 28pt, weight: "bold", fill: navy)[Logical Characterizations of Recurrent \ Graph Neural Networks with Reals and Floats]
+  #v(0.3em)
+  #text(size: 11pt, fill: luma(100))[Ahvonen · Heiman · Kuusisto · Lutz — _arXiv 2024_]
   #v(0.85em)
-  #line(length: 85%, stroke: 1.5pt + navy)
+  #line(length: 100%, stroke: 1.5pt + navy)
   #v(0.65em)
-  #text(size: 13pt, weight: "bold")[Kevin Kunkel & Thomas Mohr]
-  #v(0.15em)
-  #text(size: 11pt, fill: luma(110))[
-    Universität Leipzig · Betreuer: Prof. Carsten Lutz
-  ]
-  #v(0.55em)
-  #block(fill: sand, stroke: (left: 2.5pt + navy), inset: (x: 0.75em, y: 0.55em), radius: 3pt)[
-    #text(size: 10.5pt)[*Paper:* Ahvonen, Heiman, Kuusisto, Lutz — _NeurIPS 2024_ @ahvonen2024logical]
-  ]
+  #grid(
+    columns: (1fr, auto),
+    align: (left + horizon, right + horizon),
+    [
+      #text(size: 13pt, weight: "bold")[Kevin Kunkel & Thomas Mohr] \
+      #v(0.15em)
+      #text(size: 11pt, fill: luma(110))[Universität Leipzig · Betreuer: Prof. Carsten Lutz]
+    ],
+    [#image("leipziglogo.png", width: 12em)],
+  )
   #v(1fr)
-][
-  #align(center + horizon)[#gnn-diagram]
 ]
 
 // ══════════════════════════════════════════════════════════════════════════════

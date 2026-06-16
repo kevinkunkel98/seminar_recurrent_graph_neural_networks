@@ -41,7 +41,7 @@
       row-gutter: 0.6em,
       align: (right, center, left),
       [$X^((0))$], [:−], [$square bot$],
-      [$X$],       [:−], [$lozenge X and square X$],
+      [$X$], [:−], [$lozenge X and square X$],
     )
   ]
 ]
@@ -57,7 +57,7 @@
 // ]
 == Was ist MSO? #h(0.5em) #kevin
 
-MSO (Monadic Second Order Logic) erweitert FO um *Mengenquantifizierung*:
+MSO (Monadic Second Order Logic) erweitert FO (First Order Logic) um *Mengenquantifizierung*:
 - FO: Quantifizierung über *Elemente* ($exists x$, $forall x$)
 - MSO: zusätzlich Quantifizierung über *Mengen von Elementen* ($exists X$, $forall X$)
 
@@ -66,21 +66,20 @@ MSO (Monadic Second Order Logic) erweitert FO um *Mengenquantifizierung*:
   columns: (1fr, 1fr),
   gutter: 0.9em,
   block(fill: sand, inset: 0.8em, radius: 3pt, stroke: 0.4pt + luma(200))[
-    *Auf Graphen:* FO — „jeder Knoten hat einen Nachbarn"\
-    #v(0.2em)
-    MSO — „der Graph ist bipartit", „Pfad von $a$ nach $b$", $k$-Färbbarkeit, Zusammenhang, …
+    *Auf Graphen:*
+    - FO: „jeder Knoten hat einen Nachbarn"\
+    - MSO: „der Graph ist bipartit", „Pfad von $a$ nach $b$", $k$-Färbbarkeit, Zusammenhang, …
   ],
   block(fill: sand, inset: 0.8em, radius: 3pt, stroke: 0.4pt + luma(200))[
     *Auf Zeichenketten:*\
-    #v(0.1em)
-    FO $equiv$ sternfreie reguläre Sprachen\
-    MSO $equiv$ alle regulären Sprachen
+    - FO $equiv$ sternfreie reguläre Sprachen\
+    - MSO $equiv$ alle regulären Sprachen
   ],
 )
 
 #v(0.25em)
 #example[
-  *Bipartitheit:* $exists X. forall y. forall z. (E(y,z) -> (X(y) <-> not X(z)))$ — FO kann das *nicht* (keine Mengenvariablen).
+  *Bipartitheit:* $exists X. forall y. forall z. (E(y,z) -> (X(y) <-> not X(z)))$. FO kann das *nicht* (keine Mengenvariablen).
 ]
 
 // ── SLIDE: The MSO Collapse Theorem ──────────────────────────────────────────
@@ -109,7 +108,7 @@ MSO (Monadic Second Order Logic) erweitert FO um *Mengenquantifizierung*:
 
 #v(0.2em)
 #block(fill: mint, stroke: (left: 3pt + sage), inset: (x: 0.9em, y: 0.65em), radius: 3pt)[
-  *Schlüsselerkenntnis:* Die Extrastärke von GNN[$RR$] liegt vollständig *außerhalb* von MSO. Falls ein GNN eine MSO-Eigenschaft nicht lernt, liegt das am Training oder der Architektur — *nicht* an der Float-Präzision.
+  *Schlüsselerkenntnis:* Extrastärke von GNN[$RR$] liegt vollständig *außerhalb* von MSO. Falls ein GNN eine MSO-Eigenschaft nicht lernt, liegt das am Training oder der Architektur — *nicht* an der Float-Präzision.
 ]
 
 // ── SLIDE: Proof Pipeline ─────────────────────────────────────────────────────
@@ -135,6 +134,33 @@ MSO (Monadic Second Order Logic) erweitert FO um *Mengenquantifizierung*:
 - Variable $X_q$ pro PTA-Zustand $q$: $X_q^n(v) = 1$ $arrow.l.r.double$ $v$ hat in Tiefe-$n$-Dekoration Zustand $q$
 - Terminalklausel ($n=0$): GML-Formel für Blattbedingungen des PTA
 - Iterationsklausel: $lozenge_(>= k)$ propagiert Zustände — simuliert einen PTA-Übergangsschritt
+
+== Hauptsätze 2
+
+#v(0.4em)
+#theorem([1])[
+  Das Folgende hat die *gleiche Ausdrucksstärke*:
+  $
+    "GNN[F]" quad equiv quad "R-simple GNN[F]" quad equiv quad "GMSC"
+  $
+]
+
+#v(0.2em)
+#theorem([2])[
+  Das Folgende hat die *gleiche Ausdrucksstärke*:
+  $
+    "GNN"[RR] quad equiv quad omega"-GML"
+  $
+]
+
+#v(0.2em)
+#theorem([3 — MSO-Kollaps])[
+  Für jede in *MSO ausdrückbare* Eigenschaft $cal(P)$:
+  $
+    cal(P) "ausdrückbar als GNN"[RR] quad arrow.l.r.double quad cal(P) "ausdrückbar als GNN"[FF]
+  $
+  $=>$ Kombiniert mit Satz 1: #h(0.4em) GNN$[FF]$ $equiv$ GNN$[RR]$ $equiv$ GMSC #h(0.3em) *(über MSO)*
+]
 
 // == Absolut vs. MSO
 
