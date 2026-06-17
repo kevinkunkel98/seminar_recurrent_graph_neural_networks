@@ -3,7 +3,7 @@
 // ══════════════════════════════════════════════════════════════════════════════
 // SLIDE — Einführung
 // ══════════════════════════════════════════════════════════════════════════════
-== Einführung — Beitrag des Papers #h(0.5em) #tom #h(0.2em) #kevin
+== Einführung — Beitrag des Papers
 
 #v(0.2em)
 GNNs sind Standard in der Praxis — aber was können sie *theoretisch* ausdrücken?

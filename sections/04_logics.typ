@@ -3,7 +3,7 @@
 // ══════════════════════════════════════════════════════════════════════════════
 // ABSCHNITT 2.2 — Logiken  [Kevin]
 // ══════════════════════════════════════════════════════════════════════════════
-== Graded Modal Logic (GML) #h(0.5em) #kevin
+== Graded Modal Logic (GML)
 
 #v(0.2em)
 - GML ist Aussagenlogik, erweitert um *Zählmodalitäten*:
@@ -77,7 +77,13 @@ $
 ]
 
 #v(0.2em)
-#block(stroke: (paint: luma(160), dash: "dashed"), fill: luma(248), inset: (x: 0.9em, y: 0.7em), radius: 4pt, width: 100%)[
+#block(
+  stroke: (paint: luma(160), dash: "dashed"),
+  fill: luma(248),
+  inset: (x: 0.9em, y: 0.7em),
+  radius: 4pt,
+  width: 100%,
+)[
   #text(fill: luma(130), weight: "bold")[Satz 3] #h(0.5em)
   #text(fill: luma(130))[Kommt in Abschnitt 4 …]
   #h(1fr)

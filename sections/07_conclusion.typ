@@ -3,7 +3,7 @@
 // ══════════════════════════════════════════════════════════════════════════════
 // FAZIT  [Kevin & Tom]
 // ══════════════════════════════════════════════════════════════════════════════
-== Ergebnisse im Überblick #h(0.5em) #kevin #h(0.2em) #tom
+== Ergebnisse im Überblick
 
 #v(0.4em)
 #table(
@@ -33,8 +33,7 @@
 - Relativ zu MSO: GNN[F] $equiv$ GNN[$RR$] — *Theorie und Praxis konvergieren*
 
 // ── SLIDE: Fazit — Theorie, Silizium, Zukunft ────────────────────────────────
-== Fazit und Ausblick #h(0.5em) #kevin #h(0.2em) #tom
-
+== Fazit und Ausblick
 #v(0.2em)
 #grid(
   columns: (1fr, 1fr),
@@ -42,19 +41,34 @@
   block(fill: sky, stroke: (left: 3pt + blue), inset: (x: 0.8em, y: 0.65em), radius: 3pt)[
     *Erkenntnisse des Papers*\
     #v(0.2em)
-    - GNN[F] $equiv$ GMSC, GNN[$RR$] $equiv$ ω-GML — erste *exakte* Charakterisierung rekurrenter GNNs
+    - GNN[F] $equiv$ GMSC, GNN[$RR$] $equiv$ ω-GML
+    - erste *exakte* Charakterisierung rekurrenter GNNs
     - Absolut: GNN[$RR$] $>$ GNN[F] (Primalität, unentscheidbare Eigenschaften)
     - Relativ zu MSO: GNN[F] $=$ GNN[$RR$] — *Kollaps*
   ],
   block(fill: rgb("#fff8e1"), stroke: (left: 3pt + amber), inset: (x: 0.8em, y: 0.65em), radius: 3pt)[
-    *Die Hardwareschranke*\
+    *Die Float-Schranke*\
     #v(0.2em)
-    - Jede GPU/TPU rechnet mit IEEE 754 Floats
-    - Prop. 2.3 formalisiert: Floats können ab Schranke $k$ nicht mehr zählen
-    - Eine physikalische Grenze in Silizium\
-    - *Diese Schranke ist für die Praxis irrelevant.*
+    - Jede GPU/TPU rechnet mit IEEE-754-Floats
+    - Prop. 2.3: Floats *sättigen* — ab einer Schranke $k$ kein weiteres Zählen
+    - Folge der *endlichen Mantisse*
+    - *In der Praxis fast nie relevant*: sie greift nur bei unbeschränktem Zählen
   ],
 )
+
+#v(0.6em)
+
+// Merksatz — stärkste Betonung
+#block(
+  fill: mint,
+  width: 100%,
+  radius: 3pt,
+  inset: (x: 0.9em, y: 0.7em),
+)[
+  #text(size: 1.05em)[
+    *Mitnehmen:* Lernt ein GNN eine MSO-Eigenschaft nicht, liegt es an Architektur oder Training und *nicht* an der Float-Präzision.
+  ]
+]
 
 // #v(0.35em)
 // #block(fill: mint, stroke: (left: 3pt + sage), inset: (x: 0.9em, y: 0.65em), radius: 3pt)[

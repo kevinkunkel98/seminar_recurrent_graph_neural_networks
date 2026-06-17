@@ -1,11 +1,11 @@
 #import "../helpers.typ": *
-#import "../diagrams.typ": gnn-big-diagram, relu-star-diagram, reachability-example
+#import "../diagrams.typ": gnn-big-diagram, reachability-example, relu-star-diagram
 
 // ══════════════════════════════════════════════════════════════════════════════
 // ABSCHNITT 2.1 — GNNs  [Tom]
 // ══════════════════════════════════════════════════════════════════════════════
 
-== Message Passing GNNs #h(0.5em) #tom
+== Message Passing GNNs
 
 #align(center)[
   #gnn-big-diagram
@@ -16,7 +16,7 @@ Update: $x_v^t = "COM" (x_v^(t-1), "AGG"( \{\{ x_u^(t-1) | (v,u) in E \}\} ) )$.
 - *AGG* — aggregiert Feature-Vektoren der Nachbarn.
 - *COM* — kombiniert eigenen Feature-Vektor mit aggregiertem Ergebnis.
 
-== Node Properties #tom
+== Node Properties
 
 *Beispiel:* _Ist Symbol ☕ von Knoten $v$ aus erreichbar?_
 
@@ -38,7 +38,9 @@ Lösung:
 == Constant oder Recurrent?
 
 #v(0.2em)
-#grid(columns: (1fr, 1fr), gutter: 1.0em,
+#grid(
+  columns: (1fr, 1fr),
+  gutter: 1.0em,
   block(stroke: 1pt + blue, fill: sky, inset: 0.8em, radius: 3pt, width: 100%)[
     #text(weight: "bold", fill: blue)[Constant-Iteration GNN]\
     #v(0.3em)
@@ -55,7 +57,7 @@ Lösung:
 #v(0.35em)
 Beide können verwendet werden, um eine *Node Property* auszudrücken.
 
-== R-simple GNNs #tom
+== R-simple GNNs
 
 $
   #let faded(x) = text(fill: gray, $#x$)
@@ -70,4 +72,3 @@ $bold(A)$: Matrix, $bold(b)$: Bias-Vektor, $bold(C)$: Matrix, $"ReLU*"$: Truncat
 $
   x_v^(t) = "ReLU*" (x_v^(t-1) + sum_((v,u) in E) x_u^(t-1) )
 $
-
