@@ -51,7 +51,7 @@
     fill: navy,
   )[Logical Characterizations of Recurrent \ Graph Neural Networks with Reals and Floats]
   #v(0.3em)
-  #text(size: 11pt, fill: luma(100))[Ahvonen · Heiman · Kuusisto · Lutz — _arXiv 2024_]
+  #text(size: 11pt, fill: luma(100))[Ahvonen · Heiman · Kuusisto · Lutz — _NeurIPS 2024_]
   #v(0.85em)
   #line(length: 100%, stroke: 1.5pt + navy)
   #v(0.65em)
