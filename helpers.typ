@@ -35,7 +35,7 @@
   #body
 ]
 
-#let theorem(title, body) = thm-box([Satz: #title], body)
+#let theorem(title, body) = thm-box([#title:], body)
 #let definition(title, body) = thm-box([Definition: #title], body, fill: mint, stroke-color: sage)
 #let remark(body) = thm-box([Anmerkung], body, fill: rgb("#fef9ec"), stroke-color: amber)
 #let example(body) = thm-box([Beispiel], body, fill: rgb("#f3e5f5"), stroke-color: rgb("#7b1fa2"))

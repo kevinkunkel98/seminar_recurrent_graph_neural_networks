@@ -138,7 +138,7 @@ MSO (Monadic Second Order Logic) erweitert FO (First Order Logic) um *Mengenquan
 == Hauptsätze 2
 
 #v(0.4em)
-#theorem([1])[
+#theorem([Satz 1])[
   Das Folgende hat die *gleiche Ausdrucksstärke*:
   $
     "GNN[F]" quad equiv quad "R-simple GNN[F]" quad equiv quad "GMSC"
@@ -146,7 +146,7 @@ MSO (Monadic Second Order Logic) erweitert FO (First Order Logic) um *Mengenquan
 ]
 
 #v(0.2em)
-#theorem([2])[
+#theorem([Satz 2])[
   Das Folgende hat die *gleiche Ausdrucksstärke*:
   $
     "GNN"[RR] quad equiv quad omega"-GML"
@@ -154,7 +154,7 @@ MSO (Monadic Second Order Logic) erweitert FO (First Order Logic) um *Mengenquan
 ]
 
 #v(0.2em)
-#theorem([3 — MSO-Kollaps])[
+#theorem([Satz 3 — MSO-Kollaps])[
   Für jede in *MSO ausdrückbare* Eigenschaft $cal(P)$:
   $
     cal(P) "ausdrückbar als GNN"[RR] quad arrow.l.r.double quad cal(P) "ausdrückbar als GNN"[FF]

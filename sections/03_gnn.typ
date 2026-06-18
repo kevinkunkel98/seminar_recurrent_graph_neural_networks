@@ -78,7 +78,7 @@ $
 == Hauptsätze
 
 #v(0.2em)
-#theorem([1])[
+#theorem([Satz 1])[
   Das Folgende hat die *gleiche Ausdrucksstärke*:
   $
     "GNN"[RR] quad equiv quad omega"-GML"
@@ -86,7 +86,7 @@ $
 ]
 
 #v(0.4em)
-#theorem([2])[
+#theorem([Satz 2])[
   Das Folgende hat die *gleiche Ausdrucksstärke*:
   $
     "GNN[F]" quad equiv quad "R-simple GNN[F]" quad equiv quad "GMSC"
