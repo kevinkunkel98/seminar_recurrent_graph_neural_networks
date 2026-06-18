@@ -63,7 +63,7 @@
 //
 //  => omega-GML
 //
-#v(0.2em)
+
 #theorem([Satz 1])[
   Das Folgende hat die *gleiche Ausdrucksstärke*:
   $
@@ -82,7 +82,7 @@
 
   Beides kann in GML-Formel erfasst werden.
 
-  Über unendliche Disjunktion können beliebige Tiefen erfasst werden.
+  Über unendliche Disjunktion beliebige Tiefen erfassbar.
 
   #colbreak()
 
@@ -106,12 +106,20 @@
   */
 
   Baum als Binärstring encodieren. $-> RR$
+
+
+  #h(5em) #highlight(fill: rgb("#aaffaa"), radius: 50pt, extent: 5pt)[Beispiel auf nächster Seite.]
   /*
   1. Anzahl Nodes unär kodieren: $1^n 0$
   2. alle $n$ Labels auflisten
   3. Adjazenzmatrix zeilenweise ($n^2$ Bits)
   */
 ]
+
+#pagebreak()
+
+*Beispiel:*
+#image("../picture2.jpg", width: 50%)
 
 
 == Floats
@@ -146,7 +154,6 @@ Problem 1 lösbar durch Summen-Konvention. $=>$ Problem 2.
 
 == Beweis Satz 2
 
-#v(0.4em)
 #theorem([Satz 2])[
   Das Folgende hat die *gleiche Ausdrucksstärke*:
   $
@@ -163,22 +170,20 @@ Problem 1 lösbar durch Summen-Konvention. $=>$ Problem 2.
 
   Nur endlich viele Nachbarn erfassbar.\
   (
-  #highlight(" Problem 2 ", fill: rgb("#fff8e1"), stroke: (left: 3pt + amber), radius: 3pt)
+  #highlight("Problem 2", fill: rgb("#fff8e1"), stroke: (left: 3pt + amber), radius: 3pt, extent: 5pt)
   )
 
   $->$ Alle möglichen Multi-Sets können als endliche GML-Formel encodiert werden.
 
   #colbreak()
 
-  *GMSC $->$ R-simple GNN:*
+  *GMSC $->$ R-simple GNN[F]:*
 
-  (Programm in "Normalform" überführen.)
-
-  Je (Sub-)Schema ein Eintrag im Feature-Vektor.
+  Je Regel ein Eintrag im Feature-Vektor.
 
   Logik über Matrizen $C, A$ und Bias-Vektor $b$.
 
-  Zustätzlich eine _Clock_.
+  #h(5em) #highlight(fill: rgb("#aaffaa"), radius: 50pt, extent: 5pt)[Beispiel auf nächster Seite.]
 
   /*
   Synchronisation notwendig:
@@ -187,4 +192,26 @@ Problem 1 lösbar durch Summen-Konvention. $=>$ Problem 2.
   - GNN macht pro Logik-Schritt $D' + 1$ message rounds
   - Zähler erforderlich $->$ zweite Vektor-Hälfte.
   */
+]
+
+#pagebreak()
+
+*Beispiel:*
+#v(2em)
+
+#columns(2, gutter: 1em)[
+
+  _GMSC-Programm:_
+  $
+    X ":-" Y and Z\
+    Y ":-" diamond_(>=3) X
+  $
+
+  #colbreak()
+
+  _R-simple GNN[F]:_
+  $
+    "COM"(x, y) = sigma(x dot C + y dot A + b)
+  $
+  #image("../picture.jpg", width: 80%)
 ]
