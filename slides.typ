@@ -45,7 +45,11 @@
   #text(size: 10pt, fill: luma(140), tracking: 2pt)[SEMINAR · GRAPH NEURAL NETWORKS · SS 2026]
   #v(0.5em)
   #set par(leading: 0.75em)
-  #text(size: 28pt, weight: "bold", fill: navy)[Logical Characterizations of Recurrent \ Graph Neural Networks with Reals and Floats]
+  #text(
+    size: 28pt,
+    weight: "bold",
+    fill: navy,
+  )[Logical Characterizations of Recurrent \ Graph Neural Networks with Reals and Floats]
   #v(0.3em)
   #text(size: 11pt, fill: luma(100))[Ahvonen · Heiman · Kuusisto · Lutz — _arXiv 2024_]
   #v(0.85em)
@@ -71,7 +75,7 @@
 #include "sections/02_intro.typ"
 #include "sections/03_gnn.typ"
 #include "sections/04_logics.typ"
-#include "sections/05_automata.typ"
+#include "sections/05_proofs_1_2.typ"
 #include "sections/06_mso.typ"
 #include "sections/07_conclusion.typ"
 

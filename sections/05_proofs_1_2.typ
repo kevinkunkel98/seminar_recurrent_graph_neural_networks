@@ -62,38 +62,67 @@
 //  - reellen Zahlen $RR$
 //
 //  => omega-GML
+//
+#v(0.2em)
+#theorem([Satz 1])[
+  Das Folgende hat die *gleiche Ausdrucksstärke*:
+  $
+    "GNN"[RR] quad equiv quad omega"-GML"
+  $
+]
 
-*GNN[$RR$] $->$ $omega$-GML:*
+#v(0.2em)
+#columns(2, gutter: 1em)[
 
-(todo)
+  *GNN[$RR$] $->$ $omega$-GML:*
 
-#pagebreak()
+  Übergangsfunktion hängt ab von
+  1. eigenem Zustand
+  2. Multi-Set von Zuständen der Nachbarn.
 
-*$omega$-GML $->$ GNN[$RR$]*:
+  Beides kann in GML-Formel erfasst werden.
 
-Trick: *Tree Encoding* als Binärstring
-1. Anzahl Nodes unär kodieren: $1^n 0$
-2. alle $n$ Labels auflisten
-3. Adjazenzmatrix zeilenweise ($n^2$ Bits)
+  Über unendliche Disjunktion können beliebige Tiefen erfasst werden.
 
-Schrittweise Baum aufbauen:
-- Knoten erhält „Tree Encodings“ seiner Nachbarn.
-- `AGG` kombiniert zu größerem Baum
-- `COM` aktualisiert Label der neuen Wurzel entsprechend eigenem Label
+  #colbreak()
 
-#v(1em)
-Formel prüfen:
-- GNN erstellt Schritt für Schritt die konzentrische Map.
-  Jedes Mal überprüft es, ob die aktuelle Map in der „unendlich langen Liste“ der $omega$-GML-Formel ist.
-- Falls ja, hält es an.
+  *$omega$-GML $->$ GNN[$RR$]*:
+
+  Formel in unendliche Disjunktion von "Typen" umwandeln.
+
+  Jeder Knoten erkundet schrittweise seine Nachbarschaft.
+  /*
+  - Knoten erhält „Tree Encodings“ seiner Nachbarn.
+  - `AGG` kombiniert zu größerem Baum
+  - `COM` aktualisiert Label der neuen Wurzel entsprechend eigenem Label
+  */
+
+  /*
+  #v(1em)
+  Formel prüfen:
+  - GNN erstellt Schritt für Schritt die konzentrische Map.
+    Jedes Mal überprüft es, ob die aktuelle Map in der „unendlich langen Liste“ der $omega$-GML-Formel ist.
+  - Falls ja, hält es an.
+  */
+
+  Baum als Binärstring encodieren. $-> RR$
+  /*
+  1. Anzahl Nodes unär kodieren: $1^n 0$
+  2. alle $n$ Labels auflisten
+  3. Adjazenzmatrix zeilenweise ($n^2$ Bits)
+  */
+]
+
 
 == Floats
 
-In der Praxis *Gleitkommazahlen* (F) statt reellen Zahlen!
+In der Praxis *Gleitkommazahlen* (F), nicht $RR$!
 
-(todo: was sind floats?)
+$
+  ± 0.d_1 dots.h.c d_p times beta^e
+$
 
-Floats sind *endlich*! #h(0.5em) #highlight(fill: rgb("#aaffaa"), radius: 50pt, extent: 5pt)[Python Demo]
+Floats sind *endlich*!
 
 #v(0.2em)
 #grid(
@@ -102,12 +131,9 @@ Floats sind *endlich*! #h(0.5em) #highlight(fill: rgb("#aaffaa"), radius: 50pt, 
   block(fill: rgb("#fff8e1"), stroke: (left: 3pt + amber), inset: (x: 0.9em, y: 0.65em), radius: 3pt)[
     *Problem 1:* Addition ist nicht assoziativ.
 
-    $
-      (-1.00 + 1.00) + 0.01 & = 0.00 + 0.01 = 0.01 \
-      -1.00 + (1.00 + 0.01) & = -1.00 + 1.00 = 0
-    $
+    #h(1em) #highlight(fill: rgb("#aaffaa"), radius: 50pt, extent: 5pt)[Python Demo]
 
-    $->$ Isomorphie-Cheating möglich!
+    $->$ Isomorphie-Invarianz?
   ],
   block(fill: rgb("#fff8e1"), stroke: (left: 3pt + amber), inset: (x: 0.9em, y: 0.65em), radius: 3pt)[
     *Problem 2:* Nur endliches Zählen.
@@ -120,30 +146,46 @@ Floats sind *endlich*! #h(0.5em) #highlight(fill: rgb("#aaffaa"), radius: 50pt, 
   ],
 )
 
-Wir lösen nur Problem 1 durch _Summen-Konvention_.
+Problem 1 lösbar durch Summen-Konvention. $=>$ Problem 2.
 
 == Beweis $"GNN"[F] <=> "R-simple GNNs" <=> "GMSC"$
 
+#v(0.4em)
+#theorem([Satz 2])[
+  Das Folgende hat die *gleiche Ausdrucksstärke*:
+  $
+    "GNN[F]" quad equiv quad "R-simple GNN[F]" quad equiv quad "GMSC"
+  $
+]
+
 #v(2em)
-*GNN[F] $->$ GMSC:*
+#columns(2, gutter: 1em)[
 
-Trivial. Nur endlich viele Zustandskombinationen bei Floats.
-(todo: genauer erklären)
+  *GNN[F] $->$ GMSC:*
 
-#v(2em)
-*GMSC $->$ R-simple GNN:*
+  Nur endlich viele Zustandskombinationen bei Floats.
+  #h(1em)
+  #highlight(" Problem 2 ", fill: rgb("#fff8e1"), stroke: (left: 3pt + amber), radius: 3pt)
 
-Idee:
-- Regel = Eintrag im Feature-Vektor.
-  $->$ Verfolgt, ob Regel aktuell erfüllt.
-- Schrittweises Absteigen entlang der Formelstruktur.
+  $->$ Alle möglichen Multi-Sets können als GML-Formel encodiert werden.
 
-Synchronisation notwendig:
-- Je Regel unterschiedlich viele Schritte
-- GNN macht immer maximalen Schritt-Count.
-- GNN macht pro Logik-Schritt $D' + 1$ message rounds
-- Zähler erforderlich $->$ zweite Vektor-Hälfte.
+  #colbreak()
 
-Logik:
+  *GMSC $->$ R-simple GNN:*
 
-(todo. Bilder etc)
+  (Programm in "Normalform" überführen.)
+
+  Je (Sub-)Schema ein Eintrag im Feature-Vektor.
+
+  Logik über Matrizen $C, A$ und Bias-Vektor $b$.
+
+  Zustätzlich eine _Clock_.
+
+  /*
+  Synchronisation notwendig:
+  - Je Regel unterschiedlich viele Schritte
+  - GNN macht immer maximalen Schritt-Count.
+  - GNN macht pro Logik-Schritt $D' + 1$ message rounds
+  - Zähler erforderlich $->$ zweite Vektor-Hälfte.
+  */
+]
