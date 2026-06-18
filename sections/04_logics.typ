@@ -57,39 +57,6 @@ $
   $X^i = lozenge dots.c lozenge p$ (genau $i$ Rauten) = Erreichbarkeit in $i$ Schritten
 ]
 
-// ── SLIDE: Main Theorems ──────────────────────────────────────────────────────
-== Hauptsätze
-
-#v(0.4em)
-#theorem([1])[
-  Das Folgende hat die *gleiche Ausdrucksstärke*:
-  $
-    "GNN[F]" quad equiv quad "R-simple GNN[F]" quad equiv quad "GMSC"
-  $
-]
-
-#v(0.2em)
-#theorem([2])[
-  Das Folgende hat die *gleiche Ausdrucksstärke*:
-  $
-    "GNN"[RR] quad equiv quad omega"-GML"
-  $
-]
-
-#v(0.2em)
-#block(
-  stroke: (paint: luma(160), dash: "dashed"),
-  fill: luma(248),
-  inset: (x: 0.9em, y: 0.7em),
-  radius: 4pt,
-  width: 100%,
-)[
-  #text(fill: luma(130), weight: "bold")[Satz 3] #h(0.5em)
-  #text(fill: luma(130))[Kommt in Abschnitt 4 …]
-  #h(1fr)
-  #highlight(fill: luma(50))[#text(fill: luma(50))[GNN$[RR]$ $equiv$ GNN$[FF]$ über MSO-Eigenschaften]]
-]
-
 // ── SLIDE: ω-GML and hierarchy ────────────────────────────────────────────────
 == ω-GML und die Logikhierarchie
 
