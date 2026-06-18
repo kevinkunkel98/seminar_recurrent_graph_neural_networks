@@ -23,7 +23,7 @@ GNNs sind Standard in der Praxis — aber was können sie *theoretisch* ausdrüc
     *Dieser Beitrag — NeurIPS 2024* @ahvonen2024logical\
     #v(0.15em)
     Erste Charakterisierung *rekurrenter* GNNs — *absolut*, ohne jede Hintergrundlogik\
-    — zwei Szenarien: GNN[$RR$] (Theorie) und GNN[F] (Hardware)
+    — zwei Szenarien: GNN[$RR$] (Theorie) und GNN[F] (Praxis)
   ],
 )
 

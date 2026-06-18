@@ -8,7 +8,7 @@
 #v(0.2em)
 - GML ist Aussagenlogik, erweitert um *Zählmodalitäten*:
 $
-  phi ::= top mid p mid not phi mid phi and phi mid lozenge_(>= k) phi
+  phi ::= top | p | not phi | phi and phi | lozenge_(>= k) phi
 $
 
 - Die Schlüsselformel $lozenge_(>= k) phi$ bedeutet: *„mindestens $k$ ausgehende Nachbarn erfüllen $phi$"*
@@ -20,13 +20,11 @@ $
   - $lozenge_(>= 3) (q and lozenge_(>= 2) r)$ — „mindestens 3 Nachbarn haben $q$ und jeder hat ≥2 Nachbarn mit $r$"
 ]
 
-#v(0.3em)
-- *Klassisches Ergebnis* @barcelo2020logical: Konstantiterations-GNNs $equiv$ GML (relativ zu FO-definierbaren Eigenschaften)
-
 // ── SLIDE: GMSC ───────────────────────────────────────────────────────────────
 == Graded Modal Substitution Calculus (GMSC)
 
-- GMSC erweitert GML um *rekursive Regeln* — ein Programm $Lambda$ besteht aus zwei Klauseltypen:
+- GMSC erweitert GML um *rekursive Regeln*
+- ein Programm $Lambda$ besteht aus zwei Klauseltypen:
 
 #v(0.2em)
 #grid(
@@ -62,14 +60,14 @@ $
 
 - ω-GML fügt *unendliche Disjunktionen* von GML-Formeln hinzu:
 $
-  phi ::= psi quad | quad limits(union.big)_(psi in Psi) psi
+  phi ::= psi quad | quad limits(or.big)_(psi in Psi) psi
   quad (Psi "eine abzählbare Menge von GML-Formeln")
 $
 
 
 #v(0.3em)
 - Da GNN[R] mit reellen Zahlen *beliebig viele* Werte unterscheiden kann, benötigt es diese unendliche Ausdrucksstärke.
-- ω-GML kann *unentscheidbare* Grapheigenschaften definieren — daher ist GNN[$RR$] sehr mächtig.
+- ω-GML kann *unentscheidbare* Grapheigenschaften definieren, daher ist GNN[$RR$] sehr mächtig.
 
 #v(0.4em)
 - *Ausdrucksstärke (semantische Inklusion, nicht syntaktisch):*
