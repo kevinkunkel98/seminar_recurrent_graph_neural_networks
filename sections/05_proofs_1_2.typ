@@ -54,7 +54,7 @@
 // - GNN[F] $<->$ FCMPA — Floats sind bounded → endliche Zustandsmenge
 // - GNN[$RR$] $<->$ CMPA — reelle Zahlen unterscheiden jede Nachbaranzahl exakt
 
-== Beweis GNN[$RR$] $<=>$ $omega$-GML
+== Beweis Satz 1
 
 //- GNNs mit
 //  - unendlich vielen Zuständen $Q$
@@ -136,19 +136,15 @@ Floats sind *endlich*!
     $->$ Isomorphie-Invarianz?
   ],
   block(fill: rgb("#fff8e1"), stroke: (left: 3pt + amber), inset: (x: 0.9em, y: 0.65em), radius: 3pt)[
-    *Problem 2:* Nur endliches Zählen.
+    *Problem 2:* Summen "stabilisieren" sich bei einem Maximum.
 
-    $
-      "SUM"_"F" (M) = "SUM"_"F" (M|_k)
-    $
-
-    $->$ Gleitkommazahlen können nicht über eine feste Grenze hinaus zählen.
+    $->$ Summen können nur begrenzt viele Floats erfassen.
   ],
 )
 
 Problem 1 lösbar durch Summen-Konvention. $=>$ Problem 2.
 
-== Beweis $"GNN"[F] <=> "R-simple GNNs" <=> "GMSC"$
+== Beweis Satz 2
 
 #v(0.4em)
 #theorem([Satz 2])[
@@ -163,11 +159,14 @@ Problem 1 lösbar durch Summen-Konvention. $=>$ Problem 2.
 
   *GNN[F] $->$ GMSC:*
 
-  Nur endlich viele Zustandskombinationen bei Floats.
-  #h(1em)
-  #highlight(" Problem 2 ", fill: rgb("#fff8e1"), stroke: (left: 3pt + amber), radius: 3pt)
+  Nur endlich viele Zustände (Floats).
 
-  $->$ Alle möglichen Multi-Sets können als GML-Formel encodiert werden.
+  Nur endlich viele Nachbarn erfassbar.\
+  (
+  #highlight(" Problem 2 ", fill: rgb("#fff8e1"), stroke: (left: 3pt + amber), radius: 3pt)
+  )
+
+  $->$ Alle möglichen Multi-Sets können als endliche GML-Formel encodiert werden.
 
   #colbreak()
 

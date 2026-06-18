@@ -40,7 +40,7 @@ Beide können verwendet werden, um eine *Node Property* auszudrücken.
 
 == Node Properties
 
-*Beispiel Node Property:* _Ist Symbol ☕ von Knoten $v$ aus erreichbar?_
+*Beispiel-Property:* ☕-Reachability. _Ist Symbol ☕ von Knoten $v$ aus erreichbar?_
 
 #v(0.3em)
 #align(center)[#reachability-example]
@@ -62,13 +62,13 @@ Lösung:
 $
   #let faded(x) = text(fill: gray, $#x$)
   faded(x_v^(t) &= "COM" (x_v^(t-1), "AGG"( \{\{ x_u^(t-1) | (v,u) in E \}\} ) )) \
-  x_v^(t) &= "ReLU*" (x_v^(t-1) dot bold(C) + sum_((v,u) in E) x_u^(t-1) dot bold(A) + bold(b) )
+  x_v^(t) &= "ReLU*" (x_v^(t-1) dot bold(C) + (sum_((v,u) in E) x_u^(t-1)) dot bold(A) + bold(b) )
 $
 $bold(A)$: Matrix, $bold(b)$: Bias-Vektor, $bold(C)$: Matrix, $"ReLU*"$: Truncated ReLU.
 
 #align(center)[#relu-star-diagram]
 
-☕-Reachability realisierbar als *R-simple GNN* (mit $bold(A)=1$, $bold(b)=0$, $bold(C)=1$):
+☕-Reachability realisierbar mit $bold(A)=1$, $bold(b)=0$, $bold(C)=1$:
 $
   x_v^(t) = "ReLU*" (x_v^(t-1) + sum_((v,u) in E) x_u^(t-1) )
 $
