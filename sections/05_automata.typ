@@ -63,7 +63,7 @@
 //
 //  => omega-GML
 
-*$omega$-GML $->$ GNN[$RR$]*:
+*GNN[$RR$] $->$ $omega$-GML:*
 
 (todo)
 
