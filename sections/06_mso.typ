@@ -118,6 +118,59 @@ Wir bauen aus einer MSO-Eigenschaft Schritt für Schritt ein GMSC-Programm:
 - *Eine Iterationsrunde = ein Schritt des Automaten*
 - #sym.arrow.r Jede MSO-Eigenschaft, die ein GNN[$RR$] kann, liegt in GMSC
 
+== Mengen & Alternierung: blauer Pfad zu Rot
+#v(0.3em)
+#import "@preview/cetz:0.3.4"
+
+#grid(
+  columns: (auto, 1fr),
+  column-gutter: 1.2em,
+  align: horizon,
+  [
+    #cetz.canvas(length: 1cm, {
+      import cetz.draw: *
+      let kblau = rgb("#1565c0")
+      let kgruen = rgb("#2e7d32")
+      let krot = rgb("#c62828")
+
+      // normale Kanten (rechter Ast)
+      set-style(stroke: (paint: luma(160), thickness: 1pt))
+      line((0, 0), (1.6, -1.6))
+      line((1.6, -1.6), (1.6, -3.2))
+
+      // Gewinnpfad (grün, dick)
+      set-style(stroke: (paint: kgruen, thickness: 2.5pt))
+      line((0, 0), (-1.6, -1.6))
+      line((-1.6, -1.6), (-1.6, -3.2))
+
+      let node(pos, lbl, col) = {
+        circle(pos, radius: 0.5, fill: col, stroke: white + 1.5pt)
+        content(pos, text(fill: white, weight: "bold", size: 0.9em, lbl))
+      }
+      node((0, 0), "w", kblau)
+      node((-1.6, -1.6), "a", kblau)
+      node((1.6, -1.6), "b", kgruen)
+      node((-1.6, -3.2), "c", krot)
+      node((1.6, -3.2), "d", krot)
+
+      // Annotation an a (die Zustandsmenge)
+      content((-2.1, -1.6), anchor: "east", text(size: 0.6em, fill: kblau)[*{prüf-blau, such-rot}*])
+      // b bricht
+      content((2.1, -1.6), anchor: "west", text(size: 0.68em, fill: kgruen)[✗ grün bricht])
+    })
+  ],
+  [
+    #set text(size: 0.92em)
+    *Gesucht:* Pfad zu #text(fill: rgb("#c62828"))[*rot*], alle Knoten #text(fill: rgb("#1565c0"))[*blau*].
+    #v(0.5em)
+    - An *a*: zwei Prüfungen *gleichzeitig*: blau sein _und_ rot weitersuchen → *Zustandsmenge* (Alternierung).
+    #v(0.25em)
+    - *b* ist grün → Pfad bricht, obwohl _d_ rot ist.
+    #v(0.25em)
+    - *w* sammelt alle Wege → *Familie* von Mengen; akzeptiert, weil der Weg über _a_ aufgeht.
+  ],
+)
+
 == Hauptsätze 2
 
 #v(0.4em)
