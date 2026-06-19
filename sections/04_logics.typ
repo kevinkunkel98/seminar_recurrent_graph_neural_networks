@@ -75,7 +75,7 @@ $
   "GML" quad subset.neq quad "GMSC" quad subset.neq quad omega"-GML"
 $
 
-== Vom Halteproblem zur unentscheidbaren Eigenschaft #h(0.5em) #kevin
+== Vom Halteproblem zur unentscheidbaren Eigenschaft #h(0.5em)
 #v(0.3em)
 
 ```python
