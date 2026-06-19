@@ -76,21 +76,19 @@
 
   *GNN[$RR$] $->$ $omega$-GML:*
 
-  Übergangsfunktion hängt ab von
-  1. eigenem Zustand
-  2. Multi-Set von Zuständen der Nachbarn.
+  - Übergangsfunktion hängt ab von:
+    1. eigenem Zustand
+    2. Multi-Set von Zuständen der Nachbarn.
 
-  Beides kann in GML-Formel erfasst werden.
+  - Beides kann in GML-Formel erfasst werden.
 
-  Über unendliche Disjunktion beliebige Tiefen erfassbar.
+  - Über unendliche Disjunktion beliebige Tiefen erfassbar.
 
   #colbreak()
 
   *$omega$-GML $->$ GNN[$RR$]*:
 
-  Formel in unendliche Disjunktion von "Typen" umwandeln.
-
-  Jeder Knoten erkundet schrittweise seine Nachbarschaft.
+  - Jeder Knoten erkundet schrittweise seine Nachbarschaft.
   /*
   - Knoten erhält „Tree Encodings“ seiner Nachbarn.
   - `AGG` kombiniert zu größerem Baum
@@ -105,7 +103,7 @@
   - Falls ja, hält es an.
   */
 
-  Baum als Binärstring encodieren. $-> RR$
+  - Baum als Binärstring encodieren. $-> RR$
 
 
   #h(5em) #highlight(fill: rgb("#aaffaa"), radius: 50pt, extent: 5pt)[Beispiel auf nächster Seite.]
@@ -166,22 +164,21 @@ Problem 1 lösbar durch Summen-Konvention. $=>$ Problem 2.
 
   *GNN[F] $->$ GMSC:*
 
-  Nur endlich viele Zustände (Floats).
+  - Nur endlich viele Zustände (Floats).
 
-  Nur endlich viele Nachbarn erfassbar.\
-  (
-  #highlight("Problem 2", fill: rgb("#fff8e1"), stroke: (left: 3pt + amber), radius: 3pt, extent: 5pt)
-  )
+  - Nur endlich viele Nachbarn erfassbar.\
+    #h(0.5em)
+    #highlight("Problem 2", fill: rgb("#fff8e1"), stroke: (left: 3pt + amber), radius: 3pt, extent: 5pt)
 
-  $->$ Alle möglichen Multi-Sets können als endliche GML-Formel encodiert werden.
+  - $->$ Alle möglichen Multi-Sets können als endliche GML-Formel encodiert werden.
 
   #colbreak()
 
   *GMSC $->$ R-simple GNN[F]:*
 
-  Je Regel ein Eintrag im Feature-Vektor.
+  - Je Regel ein Eintrag im Feature-Vektor.
 
-  Logik über Matrizen $C, A$ und Bias-Vektor $b$.
+  - Logik über Matrizen $C, A$ und Bias-Vektor $b$.
 
   #h(5em) #highlight(fill: rgb("#aaffaa"), radius: 50pt, extent: 5pt)[Beispiel auf nächster Seite.]
 
@@ -201,7 +198,7 @@ Problem 1 lösbar durch Summen-Konvention. $=>$ Problem 2.
 
 #columns(2, gutter: 1em)[
 
-  _GMSC-Programm:_
+  - _GMSC-Programm:_
   $
     X ":-" Y and Z\
     Y ":-" diamond_(>=3) X
@@ -209,9 +206,12 @@ Problem 1 lösbar durch Summen-Konvention. $=>$ Problem 2.
 
   #colbreak()
 
-  _R-simple GNN[F]:_
+  - _R-simple GNN[F]:_
   $
-    "COM"(x, y) = sigma(x dot C + y dot A + b)
+    "ReLU*"(x dot C + (sum_j x_j) dot A + b)
   $
-  #image("../picture.jpg", width: 80%)
+
+  #v(2em)
+  #h(5em)
+  $C$ = ? #h(1em) $A$ = ? #h(1em) $b$ = ?
 ]
