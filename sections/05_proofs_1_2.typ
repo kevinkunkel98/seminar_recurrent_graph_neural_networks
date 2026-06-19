@@ -106,19 +106,13 @@
   - Baum als Binärstring encodieren. $-> RR$
 
 
-  #h(5em) #highlight(fill: rgb("#aaffaa"), radius: 50pt, extent: 5pt)[Beispiel auf nächster Seite.]
+  #h(5em) #highlight(fill: rgb("#aaffaa"), radius: 50pt, extent: 5pt)[Beispiel an Tafel.]
   /*
   1. Anzahl Nodes unär kodieren: $1^n 0$
   2. alle $n$ Labels auflisten
   3. Adjazenzmatrix zeilenweise ($n^2$ Bits)
   */
 ]
-
-#pagebreak()
-
-*Beispiel:*
-#image("../picture2.jpg", width: 50%)
-
 
 == Floats
 
