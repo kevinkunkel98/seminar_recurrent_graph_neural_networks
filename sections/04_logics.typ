@@ -11,7 +11,7 @@ $
   phi ::= top | p | not phi | phi and phi | lozenge_(>= k) phi
 $
 
-- Die Schlüsselformel $lozenge_(>= k) phi$ bedeutet: *„mindestens $k$ ausgehende Nachbarn erfüllen $phi$"*
+- Zum Beispiel $lozenge_(>= k) phi$ bedeutet: *„mindestens $k$ ausgehende Nachbarn erfüllen $phi$"*
 
 #v(0.3em)
 #example[
@@ -74,3 +74,35 @@ $
 $
   "GML" quad subset.neq quad "GMSC" quad subset.neq quad omega"-GML"
 $
+
+== Vom Halteproblem zur unentscheidbaren Eigenschaft #h(0.5em) #kevin
+#v(0.3em)
+
+```python
+def zaehle_bis_5(n):
+    while n != 5:     # hält erst an, wenn n == 5
+        n = n - 1     # zählt runter
+    return "fertig!"
+```
+
+#v(0.3em)
+#grid(
+  columns: (1fr, 1fr),
+  gutter: 0.8em,
+  block(fill: rgb("#e8f5e9"), inset: (x: 0.7em, y: 0.5em), radius: 3pt)[
+    #text(fill: rgb("#2e7d32"))[*`zaehle_bis_5(8)`*] → 8,7,6,5 → *hält an*
+  ],
+  block(fill: rgb("#ffebee"), inset: (x: 0.7em, y: 0.5em), radius: 3pt)[
+    #text(fill: rgb("#c62828"))[*`zaehle_bis_5(-1)`*] → −1,−2,… → *ewig*
+  ],
+)
+
+#v(0.4em)
+- *Halteproblem (Turing 1936):* kein Programm sagt für *jedes* andere vorher, ob es anhält
+- Nummeriere alle Programme $P_1, P_2, P_3, dots$ und definiere die *Haltemenge*:
+#v(0.2em)
+#align(center)[
+  #block(fill: sand, inset: (x: 1em, y: 0.55em), radius: 4pt, stroke: 0.5pt + navy)[
+    $U = { n in NN mid(|) P_n "hält bei Eingabe " n "an" }$ #h(0.6em) #text(fill: rgb("#c62828"))[unentscheidbar]
+  ]
+]

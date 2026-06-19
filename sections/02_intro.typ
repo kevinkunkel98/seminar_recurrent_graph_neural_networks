@@ -5,32 +5,29 @@
 // ══════════════════════════════════════════════════════════════════════════════
 == Einführung — Beitrag des Papers
 
+- GNNs sind überall in der Praxis, aber was können sie eigentlich erkennen?
 #v(0.2em)
-GNNs sind Standard in der Praxis, aber was können sie *theoretisch* ausdrücken?
+- Unser Werkzeug: rekurrente GNNs in *Modallogik* übersetzen → Ausdrucksstärke wird greifbar.
 
-#v(0.25em)
+#v(0.7em)
 #grid(
   columns: (1fr, 1fr),
-  gutter: 0.8em,
-  block(fill: rgb("#fff8e1"), stroke: (left: 3pt + amber), inset: (x: 0.8em, y: 0.65em), radius: 3pt)[
-    *Bekannt — Barceló et al. 2020* @barcelo2020logical\
+  gutter: 0.9em,
+  block(fill: rgb("#eef0ff"), stroke: (left: 3pt + blue), inset: (x: 0.85em, y: 0.7em), radius: 3pt)[
+    *Theorie* #h(0.3em) GNN[$RR$]\
     #v(0.15em)
-    Constant-Iteration GNNs $equiv$ GML\
-    — aber: *relativ zu FO* als Hintergrundlogik\
-    — und: kein Rekurrenz-Modell
+    reelle Zahlen: unendlich präzise.
   ],
-  block(fill: mint, stroke: (left: 3pt + sage), inset: (x: 0.8em, y: 0.65em), radius: 3pt)[
-    *Dieser Beitrag — NeurIPS 2024* @ahvonen2024logical\
+  block(fill: rgb("#fff8e1"), stroke: (left: 3pt + amber), inset: (x: 0.85em, y: 0.7em), radius: 3pt)[
+    *Praxis* #h(0.3em) GNN[F]\
     #v(0.15em)
-    - Charakterisierung *rekurrenter* GNNs — *absolut*, ohne jede Hintergrundlogik
-    - zwei Szenarien: GNN[$RR$] (Theorie) und GNN[F] (Praxis)
+    Gleitkommazahlen: endliche Genauigkeit
   ],
 )
 
-#v(0.35em)
-*Zentrale Frage:* Wo liegt die Ausdrucksstärke rekurrenter GNNs, und macht es einen Unterschied, ob man reelle Zahlen oder Gleitkommazahlen verwendet?
-
-#v(0.2em)
-#block(fill: sky, stroke: (left: 3pt + blue), inset: (x: 0.9em, y: 0.6em), radius: 3pt)[
-  *Vorschau:* GNN[F] $equiv$ GMSC und GNN[$RR$] $equiv$ ω-GML — und: GNN[F] $=$ GNN[$RR$] für alle MSO-definierbaren Eigenschaften
+#v(0.7em)
+#align(center)[
+  #text(fill: navy, size: 1.05em)[
+    *Macht dieser Unterschied einen Unterschied?*
+  ]
 ]

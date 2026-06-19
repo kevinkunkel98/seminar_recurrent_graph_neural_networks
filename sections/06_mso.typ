@@ -39,7 +39,7 @@ MSO (Monadic Second Order Logic) erweitert FO (First Order Logic) um *Mengenquan
   block(fill: sand, inset: 0.8em, radius: 3pt, stroke: 0.4pt + luma(200))[
     *Auf Graphen:*
     - FO: „jeder Knoten hat einen Nachbarn"\
-    - MSO: „der Graph ist bipartit", „Pfad von $a$ nach $b$", $k$-Färbbarkeit, Zusammenhang, …
+    - MSO: „der Graph ist bipartit", $k$-Färbbarkeit, Zusammenhang, …
   ],
   block(fill: sand, inset: 0.8em, radius: 3pt, stroke: 0.4pt + luma(200))[
     *Auf Zeichenketten:*\
@@ -96,22 +96,27 @@ MSO (Monadic Second Order Logic) erweitert FO (First Order Logic) um *Mengenquan
 ]
 
 // ── SLIDE: Proof Pipeline ─────────────────────────────────────────────────────
-== Das MSO-Kollapstheorem
+== Das MSO-Kollapstheorem — Beweisidee
+
+#v(0.6em)
+Wir bauen aus einer MSO-Eigenschaft Schritt für Schritt ein GMSC-Programm:
+
+#v(0.8em)
+*1. Eigenschaft #sym.arrow.r Automat*
+- Graph zu einem Baum abwickeln (GMSC sieht ohnehin nur Bäume)
+- MSO-Eigenschaft in einen Baumautomaten übersetzen (Janin–Walukiewicz)
+
 #v(0.5em)
-*1. $cal(P) arrow.r$ PTA $A$*
-- GMSC ist unraveling-invariant (graded Bisim.) → wertet nur Baumfaltung $T_G(v)$ aus
-- MSO auf Bäumen $equiv$ Paritätsbaumautomaten (Janin–Walukiewicz-Theorem)
-- ∴ zu $cal(P)$ existiert PTA $A$: $A$ akzeptiert $T_G(v)$ $arrow.l.r.double$ $cal(P)(G,v)$
-#v(0.4em)
-*2. PTA $A$ $arrow.r$ $k$-Präfixdekorationen*
-- PTA läuft *top-down*; die *Dekoration* wird von Blättern zur Wurzel aufgebaut
-- *Tiefe-$n$-Dekoration:* weise jedem Knoten der ersten $n$ Ebenen seine Zustandsmengen-Familie $mu(v)$ zu
-- Falls $A$ akzeptiert: ∃ minimales $n^*$, ab dem Dekoration einen Akzeptanzzeugen enthält
-#v(0.4em)
-*3. $k$-Präfixdekorationen $arrow.r$ GMSC-Programm $Lambda$*
-- Variable $X_S$ pro Zustandsmenge $S$: $X_S^n (v) = 1$ $arrow.l.r.double$ $S in mu(v)$ (Dekoration an $v$)
-- Terminalklausel ($n=0$): GML-Formel für Blattbedingungen des PTA
-- Iterationsklausel: $lozenge_(>= k)$ propagiert Zustände — simuliert einen PTA-Übergangsschritt
+*2. Automat #sym.arrow.r endliches Zertifikat*
+- Der Automat prüft den Baum, indem er Zustände durch ihn schickt
+- Statt des unendlichen Laufs genügt ein *endlich tiefer* Ausschnitt als Beweis
+- Bei Akzeptanz steht das Ergebnis ab einer endlichen Tiefe fest
+
+#v(0.5em)
+*3. Zertifikat #sym.arrow.r GMSC-Programm*
+- Das Programm rechnet diesen Automaten Runde für Runde nach
+- *Eine Iterationsrunde = ein Schritt des Automaten*
+- #sym.arrow.r Jede MSO-Eigenschaft, die ein GNN[$RR$] kann, liegt in GMSC
 
 == Hauptsätze 2
 
