@@ -200,8 +200,8 @@ Problem 1 lösbar durch Summen-Konvention. $=>$ Problem 2.
 
   - _GMSC-Programm:_
   $
-    X ":-" Y and Z\
-    Y ":-" diamond_(>=3) X
+    X & ":-" Y and Z \
+    Y & ":-" diamond_(>=2346) X
   $
 
   #colbreak()
@@ -214,4 +214,36 @@ Problem 1 lösbar durch Summen-Konvention. $=>$ Problem 2.
   #v(2em)
   #h(5em)
   $C$ = ? #h(1em) $A$ = ? #h(1em) $b$ = ?
+]
+
+== Hauptsätze
+
+#v(0.2em)
+#theorem([Satz 1])[
+  Das Folgende hat die *gleiche Ausdrucksstärke*:
+  $
+    "GNN"[RR] quad equiv quad omega"-GML"
+  $
+]
+
+#v(0.4em)
+#theorem([Satz 2])[
+  Das Folgende hat die *gleiche Ausdrucksstärke*:
+  $
+    "GNN[F]" quad equiv quad "R-simple GNN[F]" quad equiv quad "GMSC"
+  $
+]
+
+#v(0.2em)
+#block(
+  stroke: (paint: luma(160), dash: "dashed"),
+  fill: luma(248),
+  inset: (x: 0.9em, y: 0.7em),
+  radius: 4pt,
+  width: 100%,
+)[
+  #text(fill: luma(130), weight: "bold")[Satz 3] #h(0.5em)
+  #text(fill: luma(130))[Kommt jetzt!]
+  #h(1fr)
+  #highlight(fill: luma(50))[#text(fill: luma(50))[GNN$[RR]$ $equiv$ GNN$[FF]$ über MSO-Eigenschaften]]
 ]
