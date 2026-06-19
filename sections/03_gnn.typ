@@ -102,7 +102,7 @@ $
   width: 100%,
 )[
   #text(fill: luma(130), weight: "bold")[Satz 3] #h(0.5em)
-  #text(fill: luma(130))[Kommt in Abschnitt 4 …]
+  #text(fill: luma(130))[Kommt im Folgenden …]
   #h(1fr)
   #highlight(fill: luma(50))[#text(fill: luma(50))[GNN$[RR]$ $equiv$ GNN$[FF]$ über MSO-Eigenschaften]]
 ]
